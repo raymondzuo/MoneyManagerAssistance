@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MoneyManagerAssistance.Style">
     <!-- Color Resouce -->
-    <SolidColorBrush x:Key="AppBackgroundColorBrush" Color="#F0F1F5"></SolidColorBrush>
+    <SolidColorBrush x:Key="AppBackgroundColorBrush" Color="#ECF0F1"></SolidColorBrush>
     <SolidColorBrush x:Key="AppForegroundColorBrush" Color="#3B79A9"></SolidColorBrush>
     <!-- Data Template -->
     <DataTemplate x:Key="HubHeaderTemplate">
