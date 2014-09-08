@@ -93,6 +93,15 @@
     <Compile Include="SubViews\MoneyGlance.xaml.cs">
       <DependentUpon>MoneyGlance.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SubViews\More.xaml.cs">
+      <DependentUpon>More.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubViews\Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubViews\Tools.xaml.cs">
+      <DependentUpon>Tools.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -102,6 +111,15 @@
   <ItemGroup>
     <Content Include="Assets\AppBarIcon\ArrowheadDown.png" />
     <Content Include="Assets\AppBarIcon\ArrowheadDown_NoCircle.png" />
+    <Content Include="Assets\AppBarIcon\Car-Loan.png" />
+    <Content Include="Assets\AppBarIcon\Expand_Collapse.png" />
+    <Content Include="Assets\AppBarIcon\HomeLoan.png" />
+    <Content Include="Assets\AppBarIcon\Money-Coin.png" />
+    <Content Include="Assets\AppBarIcon\Money-Credit-Card.png" />
+    <Content Include="Assets\AppBarIcon\Signal-Bars.png" />
+    <Content Include="Assets\AppBarIcon\Stock-Exchange.png" />
+    <Content Include="Assets\AppBarIcon\UserGroup.png" />
+    <Content Include="Assets\AppBarIcon\View-Details.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
@@ -129,6 +147,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="SubViews\MoneyGlance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubViews\More.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubViews\Report.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubViews\Tools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

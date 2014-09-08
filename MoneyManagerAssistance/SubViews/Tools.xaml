@@ -1,0 +1,65 @@
+﻿<UserControl
+    x:Class="MoneyManagerAssistance.SubViews.Tools"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MoneyManagerAssistance.SubViews"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <Style TargetType="StackPanel" x:Key="SPStyle">
+            <Setter Property="Background" Value="{StaticResource AppModuleBrush}"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="ThisTxtBlkStyle">
+            <Setter Property="Foreground" Value="{StaticResource AppForegroundColorBrush}"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+        </Style>
+    </UserControl.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0">
+            <StackPanel Orientation="Vertical" Style="{StaticResource SPStyle}">
+                <Image Source="../Assets/AppBarIcon/HomeLoan.png"></Image>
+                <TextBlock Text="房贷计算器" Style="{StaticResource ThisTxtBlkStyle}"></TextBlock>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="0" Grid.Column="1">
+            <StackPanel Orientation="Vertical" Style="{StaticResource SPStyle}">
+                <Image Source="../Assets/AppBarIcon/Car-Loan.png"></Image>
+                <TextBlock Text="车贷计算器" Style="{StaticResource ThisTxtBlkStyle}"></TextBlock>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="0" Grid.Column="2">
+            <StackPanel Orientation="Vertical" Style="{StaticResource SPStyle}">
+                <Image Source="../Assets/AppBarIcon/Money-Coin.png"></Image>
+                <TextBlock Text="个税计算器" Style="{StaticResource ThisTxtBlkStyle}"></TextBlock>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="0">
+            <StackPanel Orientation="Vertical" Style="{StaticResource SPStyle}">
+                <Image Source="../Assets/AppBarIcon/Money-Credit-Card.png"></Image>
+                <TextBlock Text="信用卡管理" Style="{StaticResource ThisTxtBlkStyle}"></TextBlock>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

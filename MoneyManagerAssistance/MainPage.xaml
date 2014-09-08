@@ -29,12 +29,21 @@
             </HubSection>
              
             <HubSection Name="ReportHubSec" Header="财务报表" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <subview:Report></subview:Report>
+                </DataTemplate>
             </HubSection>
             
             <HubSection Name="ToolHubSec" Header="财务工具" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <subview:Tools></subview:Tools>
+                </DataTemplate>
             </HubSection>
             
             <HubSection Name="MoreHubSec" Header="更多" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}">
+               <DataTemplate>
+                   <subview:More></subview:More>
+               </DataTemplate>
             </HubSection>
         </Hub>
     </Grid>

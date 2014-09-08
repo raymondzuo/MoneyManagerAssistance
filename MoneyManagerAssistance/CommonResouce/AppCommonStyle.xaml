@@ -5,6 +5,7 @@
     <!-- Color Resouce -->
     <SolidColorBrush x:Key="AppBackgroundColorBrush" Color="#ECF0F1"></SolidColorBrush>
     <SolidColorBrush x:Key="AppForegroundColorBrush" Color="#3B79A9"></SolidColorBrush>
+    <SolidColorBrush x:Key="AppModuleBrush" Color="#FFFFFF"></SolidColorBrush>
     <!-- Data Template -->
     <DataTemplate x:Key="HubHeaderTemplate">
         <StackPanel>
