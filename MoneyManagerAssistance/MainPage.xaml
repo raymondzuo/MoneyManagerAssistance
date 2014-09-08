@@ -6,9 +6,22 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource AppBackgroundColorBrush}">
 
     <Grid>
+        <Hub Name="MainPageHub" Header="{StaticResource AppTitle}" HeaderTemplate="{StaticResource HubHeaderTemplate}">
 
+            <HubSection Name="CenterHubSec" Header="财务中心" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}">
+            </HubSection>
+            
+            <HubSection Name="ReportHubSec" Header="财务报表" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}">
+            </HubSection>
+            
+            <HubSection Name="ToolHubSec" Header="财务工具" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}">
+            </HubSection>
+            
+            <HubSection Name="MoreHubSec" Header="更多" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}">
+            </HubSection>
+        </Hub>
     </Grid>
 </Page>
