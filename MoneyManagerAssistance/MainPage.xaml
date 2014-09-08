@@ -8,17 +8,30 @@
     mc:Ignorable="d"
     xmlns:subview="using:MoneyManagerAssistance.SubViews"
     Background="{ThemeResource AppBackgroundColorBrush}">
-
+    <Page.Resources>
+        <Style TargetType="MenuFlyoutPresenter" x:Key="ThisFlyoutPresenter">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="MinHeight" Value="300"/>
+            <Setter Property="MinWidth" Value="300"/>
+        </Style>
+    </Page.Resources>
     <Grid>
-        <Hub Name="MainPageHub" Header="{StaticResource AppTitle}" HeaderTemplate="{StaticResource HubHeaderTemplate}">
+        <Hub x:Name="MainPageHub" Header="{StaticResource AppTitle}" HeaderTemplate="{StaticResource HubHeaderTemplate}" SectionsInViewChanged="MainPageHub_OnSectionsInViewChanged">
 
             <HubSection Name="CenterHubSec" Header="财务概览">
                 <HubSection.HeaderTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
                             <TextBlock Text="{Binding}" FontSize="40"  Foreground="{StaticResource AppForegroundColorBrush}" VerticalAlignment="Center"/>
-                            <Image Source="Assets/AppBarIcon/ArrowheadDown.png" Width="35" Height="35" VerticalAlignment="Center" Margin="20 0 0 0">
-                                
+                            <Image Source="Assets/AppBarIcon/ArrowheadDown.png" Width="35" Height="35" VerticalAlignment="Center" Margin="20 0 0 0" Tapped="UIElement_OnTapped">
+                                <FlyoutBase.AttachedFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Text="天视图"></MenuFlyoutItem>
+                                        <MenuFlyoutItem Text="周视图"></MenuFlyoutItem>
+                                        <MenuFlyoutItem Text="月视图"></MenuFlyoutItem>
+                                    </MenuFlyout>
+                                </FlyoutBase.AttachedFlyout>
                             </Image>
                         </StackPanel>
                     </DataTemplate>

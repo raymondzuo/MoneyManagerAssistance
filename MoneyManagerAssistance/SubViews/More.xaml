@@ -10,7 +10,7 @@
     d:DesignWidth="400">
     <UserControl.Resources>
        <Style TargetType="TextBlock" x:Key="ThisTxtStyle">
-           <Setter Property="FontSize" Value="25"></Setter>
+           <Setter Property="FontSize" Value="30"></Setter>
            <Setter Property="Foreground" Value="{StaticResource AppForegroundColorBrush}"></Setter>
            <Setter Property="Margin" Value="0 10 0 10"></Setter>
        </Style>

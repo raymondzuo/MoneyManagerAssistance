@@ -109,6 +109,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\AppBarIcon\Add-New.png" />
     <Content Include="Assets\AppBarIcon\ArrowheadDown.png" />
     <Content Include="Assets\AppBarIcon\ArrowheadDown_NoCircle.png" />
     <Content Include="Assets\AppBarIcon\Car-Loan.png" />
