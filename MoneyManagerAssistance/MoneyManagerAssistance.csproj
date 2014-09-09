@@ -117,6 +117,7 @@
     <Content Include="Assets\AppBarIcon\HomeLoan.png" />
     <Content Include="Assets\AppBarIcon\Money-Coin.png" />
     <Content Include="Assets\AppBarIcon\Money-Credit-Card.png" />
+    <Content Include="Assets\AppBarIcon\Money-Transfer.png" />
     <Content Include="Assets\AppBarIcon\Signal-Bars.png" />
     <Content Include="Assets\AppBarIcon\Stock-Exchange.png" />
     <Content Include="Assets\AppBarIcon\UserGroup.png" />

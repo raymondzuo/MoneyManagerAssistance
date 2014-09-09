@@ -61,5 +61,12 @@
                 <TextBlock Text="信用卡管理" Style="{StaticResource ThisTxtBlkStyle}"></TextBlock>
             </StackPanel>
         </Border>
+
+        <Border Grid.Row="1" Grid.Column="1">
+            <StackPanel Orientation="Vertical" Style="{StaticResource SPStyle}">
+                <Image Source="../Assets/AppBarIcon/Money-Transfer.png"></Image>
+                <TextBlock Text="汇率换算" Style="{StaticResource ThisTxtBlkStyle}"></TextBlock>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>
