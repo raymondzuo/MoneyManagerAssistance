@@ -81,10 +81,10 @@ namespace MoneyManagerAssistance
         {
             var appBar = new CommandBar();
 
-            checkInButton = new AppBarButton() { Label = "添加账务" };
-            checkInButton.Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBarIcon/CheckIn.png", UriKind.RelativeOrAbsolute) };
+            addNewAccountings = new AppBarButton() { Label = "添加账务" };
+            addNewAccountings.Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBarIcon/CheckIn.png", UriKind.RelativeOrAbsolute) };
 
-            appBar.PrimaryCommands.Add(checkInButton);
+            appBar.PrimaryCommands.Add(addNewAccountings);
             
 
             appBar.Visibility = Visibility.Visible;

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30626.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManagerAssistance", "MoneyManagerAssistance\MoneyManagerAssistance.csproj", "{0A59437F-0E48-4DE1-BCF8-85278D4E7089}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManagerAssistance.Database", "MoneyManagerAssistance.Database\MoneyManagerAssistance.Database.csproj", "{D29E906E-A763-4FED-BC25-C03DC8BB2E8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,14 @@ Global
 		{0A59437F-0E48-4DE1-BCF8-85278D4E7089}.Release|x86.ActiveCfg = Release|x86
 		{0A59437F-0E48-4DE1-BCF8-85278D4E7089}.Release|x86.Build.0 = Release|x86
 		{0A59437F-0E48-4DE1-BCF8-85278D4E7089}.Release|x86.Deploy.0 = Release|x86
+		{D29E906E-A763-4FED-BC25-C03DC8BB2E8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D29E906E-A763-4FED-BC25-C03DC8BB2E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D29E906E-A763-4FED-BC25-C03DC8BB2E8F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D29E906E-A763-4FED-BC25-C03DC8BB2E8F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D29E906E-A763-4FED-BC25-C03DC8BB2E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D29E906E-A763-4FED-BC25-C03DC8BB2E8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D29E906E-A763-4FED-BC25-C03DC8BB2E8F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D29E906E-A763-4FED-BC25-C03DC8BB2E8F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
