@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D29E906E-A763-4FED-BC25-C03DC8BB2E8F}</ProjectGuid>
+    <ProjectGuid>{D50F3A93-A8F8-45A7-B5D0-AA17BF94FFF0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MoneyManagerAssistance.Database</RootNamespace>
-    <AssemblyName>MoneyManagerAssistance.Database</AssemblyName>
+    <RootNamespace>MoneyManagerAssistance.Storage</RootNamespace>
+    <AssemblyName>MoneyManagerAssistance.Storage</AssemblyName>
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,27 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateDatabase.cs" />
-    <Compile Include="DbHelper.cs" />
+    <Compile Include="StorageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MoneyManagerAssistance.Storage\MoneyManagerAssistance.Storage.csproj">
-      <Project>{d50f3a93-a8f8-45a7-b5d0-aa17bf94fff0}</Project>
-      <Name>MoneyManagerAssistance.Storage</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="SQLitePCL">
-      <HintPath>..\packages\SQLitePCL.3.8.5.1\lib\portable-net45+sl50+win+wpa81+wp80+MonoAndroid10+MonoTouch10\SQLitePCL.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

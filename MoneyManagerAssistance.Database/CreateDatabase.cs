@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
+using MoneyManagerAssistance.Storage;
 
 namespace MoneyManagerAssistance.Database
 {
@@ -10,6 +12,12 @@ namespace MoneyManagerAssistance.Database
 
     public class CreateDatabase
     {
+        public static async void CreateLocalDatabase()
+        {
+            var dbFolder = await StorageHelper.CreateLocalFolder("DataFolder");
+            SQLiteConnection conn = new SQLiteConnection("DataFolder/MyAccount.db");
+        }
+
         public static void LoadDatabase(SQLiteConnection db)
         {
             string sql = @"CREATE TABLE IF NOT EXISTS

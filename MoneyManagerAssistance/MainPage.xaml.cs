@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=391641 上有介绍
+using MoneyManagerAssistance.Database;
 
 namespace MoneyManagerAssistance
 {
@@ -56,6 +57,8 @@ namespace MoneyManagerAssistance
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed 事件。
             // 如果使用由某些模板提供的 NavigationHelper，
             // 则系统会为您处理该事件。
+
+            CreateDatabase.CreateLocalDatabase();
         }
 
         private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
