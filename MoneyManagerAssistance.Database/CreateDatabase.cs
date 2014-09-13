@@ -12,19 +12,130 @@ namespace MoneyManagerAssistance.Database
 
     public class CreateDatabase
     {
+
+        #region DDL
+        /// <summary>
+        /// 创建账本表的sql
+        /// </summary>
+        private const string sqlOfCreateAccountBookTable = @"CREATE TABLE IF NOT EXISTS
+                                                             AccountBook (Id       INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                                                          Name          VARCHAR( 140 ),
+                                                                          CreateTime    DATETIME,
+                                                                          Description   VARCHAR( 200 ) );";
+
+        /// <summary>
+        /// 创建成员表的sql
+        /// </summary>
+        private const string sqlOfCreateMemberTable = @"CREATE TABLE IF NOT EXISTS
+                                                        Member(    Id    INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                                                   Name    VARCHAR( 140 ),
+                                                                   Description VARCHAR( 200 ) );";
+        /// <summary>
+        /// 创建财务分类的sql
+        /// </summary>
+        private const string sqlOfCreateAccountCategoryTable = @"CREATE TABLE IF NOT EXISTS
+                                                                AccountCategory( Id    INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                                                                 Name    VARCHAR( 140 ),
+                                                                                 CategoryType INTEGER NOT NULL);";
+
+        /// <summary>
+        /// 创建财务子分类的sql
+        /// </summary>
+        private const string sqlOfCreateSubAccountCategoryTable = @"CREATE TABLE IF NOT EXISTS
+                                                                    SubAccountCategory( Id    INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                                                                        Name    VARCHAR( 140 ),
+                                                                                        CategoryId    INTEGER NOT NULL,
+                                                                                        FOREIGN KEY(CategoryId) REFERENCES AccountCategory(Id) ON DELETE CASCADE );";
+
+        /// <summary>
+        /// 创建账目表的sql
+        /// </summary>
+        private const string sqlOfCreateAccountTable = @"CREATE TABLE IF NOT EXISTS
+                                                         Account( Id    INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                                                  AccountDate  DATETIME,
+                                                                  AccountSum   FLOAT,
+                                                                  Description  VARCHAR( 200 ),
+                                                                  AccountType  INTEGER NOT NULL,
+                                                                  SubCategoryId INTEGER NOT NULL,
+                                                                  MemberId   INTEGER NOT NULL,
+                                                                  ABookId    INTEGER NOT NULL,
+                                                                  FOREIGN KEY(MemberId) REFERENCES Member(Id) ON DELETE CASCADE,
+                                                                  FOREIGN KEY(SubCategoryId) REFERENCES SubAccountCategory(Id) ON DELETE CASCADE,
+                                                                  FOREIGN KEY(ABookId) REFERENCES AccountBook(Id) ON DELETE CASCADE );";
+
+        #endregion
+
+        private static SQLiteConnection conn;
+
         public static async void CreateLocalDatabase()
         {
             var dbFolder = await StorageHelper.CreateLocalFolder("DataFolder");
-            SQLiteConnection conn = new SQLiteConnection("DataFolder/MyAccount.db");
+            conn = new SQLiteConnection("DataFolder/MyAccount.db");
         }
+
+
+        public static void CreateAccountBookTable()
+        {
+            using (var statement = conn.Prepare(sqlOfCreateAccountBookTable))
+            {
+                statement.Step();
+            }
+        }
+
+        public static void CreateMemberTable()
+        {
+            using (var statement = conn.Prepare(sqlOfCreateMemberTable))
+            {
+                statement.Step();
+            }
+        }
+
+        public static void CreateAccountCategoryTable()
+        {
+            using (var statement = conn.Prepare(sqlOfCreateAccountCategoryTable))
+            {
+                statement.Step();
+            }
+        }
+
+        public static void CreateSubAccountCategoryTable()
+        {
+            using (var statement = conn.Prepare(sqlOfCreateSubAccountCategoryTable))
+            {
+                statement.Step();
+            }
+
+            var sql = @"PRAGMA foreign_keys = ON";
+            using (var statement = conn.Prepare(sql))
+            {
+                statement.Step();
+            }
+        }
+
+        public static void CreateAccountTable()
+        {
+            using (var statement = conn.Prepare(sqlOfCreateAccountTable))
+            {
+                statement.Step();
+            }
+
+            var sql = @"PRAGMA foreign_keys = ON";
+            using (var statement = conn.Prepare(sql))
+            {
+                statement.Step();
+            }
+        }
+
+
+        
 
         public static void LoadDatabase(SQLiteConnection db)
         {
             string sql = @"CREATE TABLE IF NOT EXISTS
-                                Customer (Id      INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                               AccountBook (AccountId    INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                                             Name    VARCHAR( 140 ),
-                                            City    VARCHAR( 140 ),
-                                            Contact VARCHAR( 140 ) 
+                                            CreateTime    VARCHAR( 140 ),
+                                            Description VARCHAR( 140 ) 
                             );";
             using (var statement = db.Prepare(sql))
             {
