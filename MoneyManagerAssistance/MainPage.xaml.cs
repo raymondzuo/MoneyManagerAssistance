@@ -59,6 +59,11 @@ namespace MoneyManagerAssistance
             // 则系统会为您处理该事件。
 
             CreateDatabase.CreateLocalDatabase();
+            CreateDatabase.CreateAccountBookTable();
+            CreateDatabase.CreateAccountCategoryTable();
+            CreateDatabase.CreateAccountTable();
+            CreateDatabase.CreateMemberTable();
+            CreateDatabase.CreateSubAccountCategoryTable();
         }
 
         private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
