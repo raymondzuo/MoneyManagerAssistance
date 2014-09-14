@@ -92,7 +92,7 @@ namespace MoneyManagerAssistance
             addNewAccountings.Click += (sender, args) =>
             {
                 
-                (Window.Current.Content as Frame).Navigate(typeof (NewAccountPage));
+                (Window.Current.Content as Frame).Navigate(typeof (AccountPage));
             };
 
             appBar.PrimaryCommands.Add(addNewAccountings);

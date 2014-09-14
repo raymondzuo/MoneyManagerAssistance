@@ -1,15 +1,15 @@
-﻿<Base:BasePage
-    x:Class="MoneyManagerAssistance.Views.NewAccountPage"
+﻿<UserControl
+    x:Class="MoneyManagerAssistance.Controls.DatePickerSlideView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Base="using:Raysoft.Phone.Common"
-    xmlns:local="using:MoneyManagerAssistance.Views"
+    xmlns:local="using:MoneyManagerAssistance.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource AppBackgroundColorBrush}">
-
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
     <Grid>
 
     </Grid>
-</Base:BasePage>
+</UserControl>

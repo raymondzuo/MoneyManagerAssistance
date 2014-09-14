@@ -1,0 +1,111 @@
+﻿<Base:BasePage
+    x:Class="MoneyManagerAssistance.Views.AccountPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Base="using:Raysoft.Phone.Common"
+    xmlns:local="using:MoneyManagerAssistance.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sf="using:Syncfusion.UI.Xaml.Controls.Input"
+    mc:Ignorable="d"
+    Background="{ThemeResource AppBackgroundColorBrush}">
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="TbStyle">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Foreground" Value="{StaticResource AppForegroundColorBrush}"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="StackPanel" x:Key="SpStyle">
+            <Setter Property="Height" Value="20"></Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="10 0 10 0">
+        
+        <ScrollViewer>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="账目日期"  Grid.Row="0" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
+                <sf:SfDateTimeCombo Grid.Row="0" Grid.Column="1" Margin="10 0 0 0" x:Name="DP1" Foreground="{StaticResource AppForegroundColorBrush}"
+                                       FormatString="{Binding DateFormat}" HorizontalContentAlignment="Center" Height="45"
+                                       Width="400" HorizontalAlignment="Left">
+                </sf:SfDateTimeCombo>
+
+                <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="1" Grid.ColumnSpan="3"></StackPanel>
+
+                <TextBlock Text="选择成员"  Grid.Row="2" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
+                <ComboBox SelectedIndex="0" Grid.Row="2" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
+                          BorderThickness="1" Width="300" HorizontalAlignment="Left" Margin="15 0 0 0">
+                    <ComboBox.Items>
+                        <TextBlock Text="本人" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
+                        <TextBlock Text="老爸" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
+                        <TextBlock Text="老妈" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
+                        <TextBlock Text="老婆" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
+                    </ComboBox.Items>
+                </ComboBox>
+
+                <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="3" Grid.ColumnSpan="3"></StackPanel>
+
+                <TextBlock Text="账目类别"  Grid.Row="4" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
+                <ComboBox SelectedIndex="0" Grid.Row="4" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
+                          BorderThickness="1" Width="300" HorizontalAlignment="Left" Margin="15 0 0 0">
+                    <ComboBox.Items>
+                        <TextBlock Text="收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
+                        <TextBlock Text="支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
+                    </ComboBox.Items>
+                </ComboBox>
+
+                <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="5" Grid.ColumnSpan="3"></StackPanel>
+
+                <TextBlock Text="项目"  Grid.Row="6" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
+                <TextBox Width="300" Grid.Row="6" Grid.Column="1" IsReadOnly="True" Text="交通消费"
+                         Foreground="{StaticResource AppForegroundColorBrush}" FontSize="20" Margin="15 5 0 5" HorizontalAlignment="Left"></TextBox>
+
+                <StackPanel Style="{StaticResource SpStyle}" Grid.Row="7" Grid.ColumnSpan="3"></StackPanel>
+                
+                <TextBlock Text="金额"  Grid.Row="8" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
+                <TextBox InputScope="Number" Width="300" Grid.Row="8" Grid.Column="1" 
+                         Foreground="{StaticResource AppForegroundColorBrush}" FontSize="20" Margin="15 5 0 5" HorizontalAlignment="Left"></TextBox>
+
+                <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="9" Grid.ColumnSpan="3"></StackPanel>
+
+                <TextBlock Text="选择账户"  Grid.Row="10" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
+                <ComboBox SelectedIndex="0" Grid.Row="10" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
+                          BorderThickness="1" Width="300" HorizontalAlignment="Left" Margin="15 0 0 0">
+                    <ComboBox.Items>
+                        <TextBlock Text="现金" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
+                        <TextBlock Text="支付宝" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
+                        <TextBlock Text="银行卡" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
+                    </ComboBox.Items>
+                </ComboBox>
+
+                <StackPanel Style="{StaticResource SpStyle}" Grid.Row="11" Grid.ColumnSpan="3"></StackPanel>
+
+                <TextBlock Text="备注"  Grid.Row="12" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
+                <TextBox Width="300" Grid.Row="12" Grid.Column="1" AcceptsReturn="True" Height="200" TextWrapping="Wrap"
+                         Foreground="{StaticResource AppForegroundColorBrush}" FontSize="20" Margin="15 5 0 5" HorizontalAlignment="Left"></TextBox>
+            </Grid>
+        </ScrollViewer>
+
+
+    </Grid>
+</Base:BasePage>

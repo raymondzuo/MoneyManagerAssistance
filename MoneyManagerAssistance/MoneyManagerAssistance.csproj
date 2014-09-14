@@ -87,6 +87,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CategorySlideView.xaml.cs">
+      <DependentUpon>CategorySlideView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DatePickerSlideView.xaml.cs">
+      <DependentUpon>DatePickerSlideView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -103,8 +109,8 @@
     <Compile Include="SubViews\Tools.xaml.cs">
       <DependentUpon>Tools.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewAccountPage.xaml.cs">
-      <DependentUpon>NewAccountPage.xaml</DependentUpon>
+    <Compile Include="Views\AccountPage.xaml.cs">
+      <DependentUpon>AccountPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +144,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\CategorySlideView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DatePickerSlideView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -168,7 +182,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NewAccountPage.xaml">
+    <Page Include="Views\AccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,6 +215,9 @@
     </SDKReference>
     <SDKReference Include="SQLite.WP81, Version=3.8.6">
       <Name>SQLite for Windows Phone 8.1 %28SQLite.WP81, Version=3.8.6%29</Name>
+    </SDKReference>
+    <SDKReference Include="Syncfusion 8.1 Controls for WP XAML, Version=12.2.0.36">
+      <Name>Syncfusion 8.1 Controls for WP XAML</Name>
     </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -21,11 +23,12 @@ namespace MoneyManagerAssistance.Views
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class NewAccountPage : BasePage
+    public sealed partial class AccountPage : BasePage,INotifyPropertyChanged
     {
-        public NewAccountPage()
+        public AccountPage()
         {
             this.InitializeComponent();
+            this.DataContext = this;
         }
 
         /// <summary>
@@ -36,6 +39,27 @@ namespace MoneyManagerAssistance.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+        }
+
+        private String dateformatString = "M/d/yyyy";
+
+        public String DateFormat
+        {
+            get { return dateformatString; }
+            set
+            {
+                dateformatString = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }
