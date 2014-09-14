@@ -21,8 +21,16 @@
     </Page.Resources>
 
     <Grid Margin="10 0 10 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="财务助理" Foreground="{StaticResource AppForegroundColorBrush}" FontSize="15" Grid.Row="0" Margin="0 10 0 0"/>
+        <TextBlock Text="新建账目" Foreground="{StaticResource AppForegroundColorBrush}" FontSize="30" Grid.Row="1" Margin="0 20 0 0"/>
         
-        <ScrollViewer>
+        <ScrollViewer Grid.Row="2" Margin="0 30 0 0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -46,7 +54,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="账目日期"  Grid.Row="0" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
                 <sf:SfDateTimeCombo Grid.Row="0" Grid.Column="1" Margin="10 0 0 0" x:Name="DP1" Foreground="{StaticResource AppForegroundColorBrush}"
-                                       FormatString="{Binding DateFormat}" HorizontalContentAlignment="Center" Height="45"
+                                       FormatString="{Binding DateFormat}" HorizontalContentAlignment="Center" Height="45" Grid.ColumnSpan="2"
                                        Width="400" HorizontalAlignment="Left">
                 </sf:SfDateTimeCombo>
 
@@ -85,6 +93,7 @@
                 <TextBlock Text="金额"  Grid.Row="8" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
                 <TextBox InputScope="Number" Width="300" Grid.Row="8" Grid.Column="1" 
                          Foreground="{StaticResource AppForegroundColorBrush}" FontSize="20" Margin="15 5 0 5" HorizontalAlignment="Left"></TextBox>
+                <Image Source="../Assets/AppBarIcon/DeviceCalculator.png" Width="40" Height="40" Grid.Row="8" Grid.Column="2" HorizontalAlignment="Left" Margin="0 0 10 0"></Image>
 
                 <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="9" Grid.ColumnSpan="3"></StackPanel>
 
@@ -108,4 +117,20 @@
 
 
     </Grid>
+    <Page.BottomAppBar>
+        <CommandBar Foreground="{StaticResource AppForegroundColorBrush}">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="保存">
+                    <AppBarButton.Icon>
+                        <BitmapIcon UriSource="../Assets/AppBarIcon/Save.png"></BitmapIcon>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Label="保存返回">
+                    <AppBarButton.Icon>
+                        <BitmapIcon UriSource="../Assets/AppBarIcon/CommandUndo.png"></BitmapIcon>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Base:BasePage>

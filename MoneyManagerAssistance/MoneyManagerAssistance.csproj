@@ -123,11 +123,14 @@
     <Content Include="Assets\AppBarIcon\ArrowheadDown.png" />
     <Content Include="Assets\AppBarIcon\ArrowheadDown_NoCircle.png" />
     <Content Include="Assets\AppBarIcon\Car-Loan.png" />
+    <Content Include="Assets\AppBarIcon\CommandUndo.png" />
+    <Content Include="Assets\AppBarIcon\DeviceCalculator.png" />
     <Content Include="Assets\AppBarIcon\Expand_Collapse.png" />
     <Content Include="Assets\AppBarIcon\HomeLoan.png" />
     <Content Include="Assets\AppBarIcon\Money-Coin.png" />
     <Content Include="Assets\AppBarIcon\Money-Credit-Card.png" />
     <Content Include="Assets\AppBarIcon\Money-Transfer.png" />
+    <Content Include="Assets\AppBarIcon\Save.png" />
     <Content Include="Assets\AppBarIcon\Signal-Bars.png" />
     <Content Include="Assets\AppBarIcon\Stock-Exchange.png" />
     <Content Include="Assets\AppBarIcon\UserGroup.png" />
