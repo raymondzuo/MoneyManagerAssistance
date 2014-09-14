@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
-using MoneyManagerAssistance.Storage;
+using Raysoft.Storage;
 
-namespace MoneyManagerAssistance.Database
+namespace Raysoft.Database
 {
     using SQLitePCL;
 
@@ -67,6 +67,7 @@ namespace MoneyManagerAssistance.Database
 
         private static SQLiteConnection conn;
 
+        #region 创建数据表
         public static async void CreateLocalDatabase()
         {
             var dbFolder = await StorageHelper.CreateLocalFolder("DataFolder");
@@ -126,8 +127,41 @@ namespace MoneyManagerAssistance.Database
             }
         }
 
+        #endregion
 
+        #region DML
         
+        public static async Task<bool> InsertAccount(DateTime accountDate,float accountSum,string description, int subCategoryId, int memberId, int accountBookId)
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    using (var account = conn.Prepare("INSERT INTO Account (AccountDate, AccountSum, Description, SubCategoryId, MemberId, ABookId) VALUES (?, ?, ?, ?, ?, ?)"))
+                    {
+                        //custstmt.Bind(1, customerName);
+                        //custstmt.Bind(2, customerCity);
+                        //custstmt.Bind(3, customerContact);
+                        //custstmt.Step();
+
+                    }
+                }
+                );
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion
+
+
+
+
+
 
         public static void LoadDatabase(SQLiteConnection db)
         {

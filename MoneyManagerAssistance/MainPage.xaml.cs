@@ -10,20 +10,21 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-
-// “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=391641 上有介绍
-using MoneyManagerAssistance.Database;
+using MoneyManagerAssistance.Views;
+using Raysoft.Database;
+using Raysoft.Phone.Common;
+using Raysoft.Utility;
 
 namespace MoneyManagerAssistance
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : BasePage
     {
         private AppBarButton addNewAccountings;
         private AppBarButton marktReviewButton;
@@ -37,10 +38,7 @@ namespace MoneyManagerAssistance
         {
             this.InitializeComponent();
 
-            this.NavigationCacheMode = NavigationCacheMode.Required;
-            StatusBar.GetForCurrentView().BackgroundOpacity = 0;
             InitAppBar();
-            
         }
 
         /// <summary>
@@ -90,12 +88,14 @@ namespace MoneyManagerAssistance
             var appBar = new CommandBar();
 
             addNewAccountings = new AppBarButton() { Label = "添加账务" };
-            addNewAccountings.Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBarIcon/CheckIn.png", UriKind.RelativeOrAbsolute) };
+            addNewAccountings.Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBarIcon/Add-New.png", UriKind.RelativeOrAbsolute) };
+            addNewAccountings.Click += (sender, args) =>
+            {
+                
+                (Window.Current.Content as Frame).Navigate(typeof (NewAccountPage));
+            };
 
             appBar.PrimaryCommands.Add(addNewAccountings);
-            
-
-            appBar.Visibility = Visibility.Visible;
             this.BottomAppBar = appBar;
             SetAppBarBackgroundColor();
         }
@@ -106,8 +106,7 @@ namespace MoneyManagerAssistance
             {
                 this.BottomAppBar.Opacity = Opacity;
                 this.BottomAppBar.IsSticky = false;
-                this.BottomAppBar.Foreground = new SolidColorBrush(Colors.White);
-                
+                this.BottomAppBar.Foreground = new SolidColorBrush(Utility.ConvertColorFromHex("#3B79A9"));
             }
         }
     }

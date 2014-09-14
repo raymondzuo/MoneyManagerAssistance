@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace MoneyManagerAssistance.Storage
+namespace Raysoft.Storage
 {
     public class StorageHelper
     {

@@ -64,7 +64,7 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>ARM</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
@@ -82,7 +82,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -103,6 +102,9 @@
     </Compile>
     <Compile Include="SubViews\Tools.xaml.cs">
       <DependentUpon>Tools.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewAccountPage.xaml.cs">
+      <DependentUpon>NewAccountPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -166,11 +168,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NewAccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MoneyManagerAssistance.Database\MoneyManagerAssistance.Database.csproj">
+    <ProjectReference Include="..\MoneyManagerAssistance.Database\Raysoft.Database.csproj">
       <Project>{d29e906e-a763-4fed-bc25-c03dc8bb2e8f}</Project>
-      <Name>MoneyManagerAssistance.Database</Name>
+      <Name>Raysoft.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Raysoft.Phone.Common\Raysoft.Phone.Common.csproj">
+      <Project>{4ab72d25-796d-4653-82c6-6c02424aa5f8}</Project>
+      <Name>Raysoft.Phone.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Raysoft.Utility\Raysoft.Utility.csproj">
+      <Project>{31ae5e4c-3bc5-47c5-9033-a744d767c3a0}</Project>
+      <Name>Raysoft.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
