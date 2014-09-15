@@ -40,7 +40,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Row="0" Grid.Column="1">
+        <Border Grid.Row="0" Grid.Column="1" Tag="1" Tapped="UIElement_OnTapped">
             <StackPanel Orientation="Vertical" Style="{StaticResource SPStyle}">
                 <Image Source="../Assets/AppBarIcon/Stock-Exchange.png"></Image>
                 <TextBlock Text="收支趋势图" Style="{StaticResource ThisTxtBlkStyle}"></TextBlock>

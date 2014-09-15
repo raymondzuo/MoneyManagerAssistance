@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // “用户控件”项模板在 http://go.microsoft.com/fwlink/?LinkId=234236 上提供
+using MoneyManagerAssistance.Views;
+using Raysoft.Phone.Common;
 
 namespace MoneyManagerAssistance.SubViews
 {
@@ -22,6 +24,11 @@ namespace MoneyManagerAssistance.SubViews
         public Report()
         {
             this.InitializeComponent();
+        }
+
+        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            NavigationService.Navigate(typeof (In_OutTrendPage));
         }
     }
 }

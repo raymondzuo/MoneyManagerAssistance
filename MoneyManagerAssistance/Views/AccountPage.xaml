@@ -93,7 +93,13 @@
                 <TextBlock Text="金额"  Grid.Row="8" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
                 <TextBox InputScope="Number" Width="300" Grid.Row="8" Grid.Column="1" 
                          Foreground="{StaticResource AppForegroundColorBrush}" FontSize="20" Margin="15 5 0 5" HorizontalAlignment="Left"></TextBox>
-                <Image Source="../Assets/AppBarIcon/DeviceCalculator.png" Width="40" Height="40" Grid.Row="8" Grid.Column="2" HorizontalAlignment="Left" Margin="0 0 10 0"></Image>
+                <Image Source="../Assets/AppBarIcon/DeviceCalculator.png" Width="40" Height="40" Grid.Row="8" Grid.Column="2" HorizontalAlignment="Left" Margin="0 0 10 0">
+                    <Image.Transitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition/>
+                        </TransitionCollection>
+                    </Image.Transitions>
+                </Image>
 
                 <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="9" Grid.ColumnSpan="3"></StackPanel>
 
