@@ -36,12 +36,13 @@
                 </Style>
 
             </Grid.Resources>
-            <chart:SfChart x:Name="lineChart">
+            <chart:SfChart x:Name="lineChart"> 
                 <chart:SfChart.Header>
-                    <TextBlock FontSize="22" Foreground="{StaticResource AppForegroundColorBrush}" Margin="10">收支趋势图</TextBlock>
+                    <TextBlock FontSize="22" Foreground="{StaticResource AppForegroundColorBrush}" HorizontalAlignment="Center" Margin="40 0 0 0">收支趋势图</TextBlock>
                 </chart:SfChart.Header>
                 <chart:SfChart.Legend>
-                    <chart:ChartLegend DockPosition="Top" HorizontalAlignment="Center" FontSize="18" Foreground="{StaticResource AppForegroundColorBrush}"/>
+                    <chart:ChartLegend DockPosition="Top" LegendPosition="Outside"  HorizontalAlignment="Center" FontSize="18"  Foreground="{StaticResource AppForegroundColorBrush}">
+                    </chart:ChartLegend>    
                 </chart:SfChart.Legend>
                 <chart:SfChart.AreaBorderBrush>#FF1D1D1D</chart:SfChart.AreaBorderBrush>
                 <chart:SfChart.AreaBorderThickness>1</chart:SfChart.AreaBorderThickness>
@@ -65,41 +66,16 @@
                                          LabelTemplate="{StaticResource labelTemplate}" />
                 </chart:SfChart.SecondaryAxis>
 
-                <chart:LineSeries EnableAnimation="True" ShowTooltip="True" chart:ChartTooltip.EnableAnimation="True" XBindingPath="Year" ItemsSource="{Binding power}" Label="Sports"  YBindingPath="Sports">
-                    <chart:LineSeries.AdornmentsInfo>
-                        <chart:ChartAdornmentInfo Symbol="Ellipse" ShowLabel="True" ShowMarker="True">
-                            <chart:ChartAdornmentInfo.LabelTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Ellipse Fill="#FF1BA1E2" Height="26" Width="26" StrokeThickness="0" >
-                                        </Ellipse>
-                                        <TextBlock Text="{Binding}"  FontFamily="Segoe UI" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                    </Grid>
-                                </DataTemplate>
-                            </chart:ChartAdornmentInfo.LabelTemplate>
-                        </chart:ChartAdornmentInfo>
-                    </chart:LineSeries.AdornmentsInfo>
-                </chart:LineSeries>
-                
                 <chart:LineSeries EnableAnimation="True" ShowTooltip="True" chart:ChartTooltip.EnableAnimation="True"
-                                  XBindingPath="Year" Label="支出" ItemsSource="{Binding power}" YBindingPath="Books">
-                    <chart:LineSeries.AdornmentsInfo>
-                        <chart:ChartAdornmentInfo Symbol="Ellipse" ShowLabel="True" SymbolInterior="Red" ShowMarker="True">
-                            <chart:ChartAdornmentInfo.LabelTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Ellipse Fill="Red" Height="26" Width="26" StrokeThickness="0" />
-                                        <TextBlock Text="{Binding}" FontFamily="Segoe UI" FontSize="14"
-                                                   VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                    </Grid>
-                                </DataTemplate>
-                            </chart:ChartAdornmentInfo.LabelTemplate>
-                        </chart:ChartAdornmentInfo>
-                    </chart:LineSeries.AdornmentsInfo>
-                </chart:LineSeries>
+                                  XBindingPath="Year" Label="收入" ItemsSource="{Binding power}" YBindingPath="Music" Interior="Green">
+                    <chart:LineSeries.CustomTemplate>
+                        <DataTemplate>
+                            <Canvas>
+                                <Line X1="{Binding X1}" X2="{Binding X2}" Y1="{Binding Y1}" Y2="{Binding Y2}" Stroke="Green"  StrokeThickness="{Binding StrokeThickness}" />
+                            </Canvas>
+                        </DataTemplate>
+                    </chart:LineSeries.CustomTemplate>
 
-                <chart:LineSeries EnableAnimation="True" ShowTooltip="True" chart:ChartTooltip.EnableAnimation="True"
-                                  XBindingPath="Year" Label="收入" ItemsSource="{Binding power}" YBindingPath="Music">
                     <chart:LineSeries.AdornmentsInfo>
                         <chart:ChartAdornmentInfo Symbol="Ellipse" SymbolInterior="#FF339933" ShowLabel="True"
                                                   ShowMarker="True">
@@ -115,6 +91,33 @@
                         </chart:ChartAdornmentInfo>
                     </chart:LineSeries.AdornmentsInfo>
                 </chart:LineSeries>
+
+                <chart:LineSeries EnableAnimation="True" ShowTooltip="True" chart:ChartTooltip.EnableAnimation="True"
+                                  XBindingPath="Year" Label="支出" ItemsSource="{Binding power}" YBindingPath="Books" Interior="Red">
+                    <chart:LineSeries.CustomTemplate>
+                        <DataTemplate>
+                            <Canvas>
+                                <Line X1="{Binding X1}" X2="{Binding X2}" Y1="{Binding Y1}" Y2="{Binding Y2}" Stroke="Red"  StrokeThickness="{Binding StrokeThickness}" />
+                            </Canvas>
+                        </DataTemplate>
+                    </chart:LineSeries.CustomTemplate>
+                    
+                    <chart:LineSeries.AdornmentsInfo>
+                        <chart:ChartAdornmentInfo Symbol="Ellipse" ShowLabel="True" SymbolInterior="Red" ShowMarker="True">
+                            <chart:ChartAdornmentInfo.LabelTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Ellipse Fill="Red" Height="26" Width="26" StrokeThickness="0" />
+                                        <TextBlock Text="{Binding}" FontFamily="Segoe UI" FontSize="14"
+                                                   VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </chart:ChartAdornmentInfo.LabelTemplate>
+                        </chart:ChartAdornmentInfo>
+                    </chart:LineSeries.AdornmentsInfo>
+                </chart:LineSeries>
+
+                
 
             </chart:SfChart>
         </Grid>
