@@ -51,7 +51,7 @@
                     <chart:CategoryAxis ShowTrackBallInfo="True"
                                         MajorGridLineStyle="{StaticResource majorTickLineStyle}"
                                         MinorTickLineStyle="{StaticResource majorTickLineStyle}"
-                                        LabelFormat="yyyy"
+                                        LabelFormat="{Binding Format}"
                                         FontSize="18"
                                         PlotOffset="20"
                                         Header="月份"

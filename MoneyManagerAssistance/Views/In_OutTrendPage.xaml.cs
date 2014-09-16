@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -15,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkID=390556 上有介绍
+using MoneyManagerAssistance.Annotations;
 using Raysoft.Phone.Common;
 using Raysoft.Utility;
 using Syncfusion.UI.Xaml.Charts;
@@ -54,8 +57,10 @@ namespace MoneyManagerAssistance.Views
             addNewAccountings.Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBarIcon/Add-New.png", UriKind.RelativeOrAbsolute) };
             addNewAccountings.Click += (sender, args) =>
             {
+                var vm = this.DataContext as LineViewModel;
+                vm.Format = "yyyy-m";
+                vm.LoadMore();
 
-                (Window.Current.Content as Frame).Navigate(typeof(AccountPage));
             };
 
             appBar.PrimaryCommands.Add(addNewAccountings);
@@ -74,7 +79,7 @@ namespace MoneyManagerAssistance.Views
         }
     }
 
-    public class LineViewModel
+    public class LineViewModel:INotifyPropertyChanged
     {
         public LineViewModel()
         {
@@ -88,6 +93,7 @@ namespace MoneyManagerAssistance.Views
             power.Add(new Entertainment() { Year = yr.AddYears(6), Sports = 35, Books = 39, Music = 42, Type = "支出" });
             power.Add(new Entertainment() { Year = yr.AddYears(7), Sports = 30, Books = 37, Music = 43, Type = "支出" });
 
+            Format = "yyyy";
             type = new ObservableCollection<LegendItem>();
             var item1 = new LegendItem();
             item1.Label = "收入";
@@ -99,6 +105,12 @@ namespace MoneyManagerAssistance.Views
             type.Add(item2);
             type.Add(item2);
 
+        }
+
+        public void LoadMore()
+        {
+            DateTime yr = new DateTime(2002, 5, 1);
+            power.Add(new Entertainment() { Year = yr.AddYears(8), Sports = 30, Books = 37, Music = 43, Type = "支出" });
         }
 
 
@@ -114,7 +126,26 @@ namespace MoneyManagerAssistance.Views
             set;
         }
 
-        
+        private string _format;
+
+        public string Format
+        {
+            set
+            {
+                this._format = value;
+                this.OnPropertyChanged();
+            }
+            get { return this._format; }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
     public class Entertainment
     {
