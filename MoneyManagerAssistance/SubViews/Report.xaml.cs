@@ -28,7 +28,19 @@ namespace MoneyManagerAssistance.SubViews
 
         private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            NavigationService.Navigate(typeof (In_OutTrendPage));
+            var border = sender as Border;
+            switch (border.Tag.ToString())
+            {
+                case "1":
+                    NavigationService.Navigate(typeof(In_OutTrendPage));
+                    break;
+                case "2":
+                    NavigationService.Navigate(typeof(IncomeStatisticsPage));
+                    break;
+
+            }
+            
+            
         }
     }
 }

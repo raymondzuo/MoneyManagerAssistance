@@ -113,6 +113,9 @@
     <Compile Include="Views\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\IncomeStatisticsPage.xaml.cs">
+      <DependentUpon>IncomeStatisticsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\In_OutTrendPage.xaml.cs">
       <DependentUpon>In_OutTrendPage.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IncomeStatisticsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

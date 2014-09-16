@@ -47,7 +47,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Row="0" Grid.Column="2">
+        <Border Grid.Row="0" Grid.Column="2" Tag="2" Tapped="UIElement_OnTapped">
             <StackPanel Orientation="Vertical" Style="{StaticResource SPStyle}">
                 <Image Source="../Assets/AppBarIcon/Signal-Bars.png"></Image>
                 <TextBlock Text="收入统计图" Style="{StaticResource ThisTxtBlkStyle}"></TextBlock>
