@@ -1,0 +1,44 @@
+﻿<common:BasePage
+    x:Class="MoneyManagerAssistance.Views.BudgetPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MoneyManagerAssistance.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:Raysoft.Phone.Common"
+    xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
+    mc:Ignorable="d"
+    Background="{StaticResource AppBackgroundColorBrush}">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Text="财务助理" FontSize="14" Foreground="{StaticResource AppForegroundColorBrush}" Margin="0 10 0 0"></TextBlock>
+        <TextBlock Grid.Row="1" Text="财务预算" FontSize="20" Foreground="{StaticResource AppForegroundColorBrush}" Margin="0 20 0 0"></TextBlock>
+        <input:SfDateTimeCombo Grid.Row="2"  Margin="0 10 0 0" x:Name="DP1" Foreground="{StaticResource AppForegroundColorBrush}"
+                                       FormatString="M" HorizontalContentAlignment="Center" Height="45"
+                                       Width="400" HorizontalAlignment="Left"/>
+        <SemanticZoom Grid.Row="3" Margin="0 20 0 0"></SemanticZoom>
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="周预算">
+                    <AppBarButton.Icon>
+                        <BitmapIcon UriSource="../Assets/AppBarIcon/WeekIcon.png"></BitmapIcon>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Label="月预算">
+                    <AppBarButton.Icon>
+                        <BitmapIcon UriSource="../Assets/AppBarIcon/MonthIcon.png"></BitmapIcon>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</common:BasePage>

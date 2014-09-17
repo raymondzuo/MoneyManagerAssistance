@@ -113,11 +113,17 @@
     <Compile Include="Views\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\IncomeStatisticsPage.xaml.cs">
-      <DependentUpon>IncomeStatisticsPage.xaml</DependentUpon>
+    <Compile Include="Views\BudgetPage.xaml.cs">
+      <DependentUpon>BudgetPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\In_OutTrendPage.xaml.cs">
-      <DependentUpon>In_OutTrendPage.xaml</DependentUpon>
+    <Compile Include="Views\CategoryPage.xaml.cs">
+      <DependentUpon>CategoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatisticsPage.xaml.cs">
+      <DependentUpon>StatisticsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrendPage.xaml.cs">
+      <DependentUpon>TrendPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +135,7 @@
     <Content Include="Assets\AppBarIcon\Add-New.png" />
     <Content Include="Assets\AppBarIcon\ArrowheadDown.png" />
     <Content Include="Assets\AppBarIcon\ArrowheadDown_NoCircle.png" />
+    <Content Include="Assets\AppBarIcon\Budget.png" />
     <Content Include="Assets\AppBarIcon\Car-Loan.png" />
     <Content Include="Assets\AppBarIcon\CommandUndo.png" />
     <Content Include="Assets\AppBarIcon\DeviceCalculator.png" />
@@ -137,11 +144,14 @@
     <Content Include="Assets\AppBarIcon\Money-Coin.png" />
     <Content Include="Assets\AppBarIcon\Money-Credit-Card.png" />
     <Content Include="Assets\AppBarIcon\Money-Transfer.png" />
+    <Content Include="Assets\AppBarIcon\MonthIcon.png" />
     <Content Include="Assets\AppBarIcon\Save.png" />
     <Content Include="Assets\AppBarIcon\Signal-Bars.png" />
     <Content Include="Assets\AppBarIcon\Stock-Exchange.png" />
     <Content Include="Assets\AppBarIcon\UserGroup.png" />
     <Content Include="Assets\AppBarIcon\View-Details.png" />
+    <Content Include="Assets\AppBarIcon\WeekIcon.png" />
+    <Content Include="Assets\AppBarIcon\YearIcon.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
@@ -196,11 +206,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\IncomeStatisticsPage.xaml">
+    <Page Include="Views\BudgetPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\In_OutTrendPage.xaml">
+    <Page Include="Views\CategoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatisticsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrendPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

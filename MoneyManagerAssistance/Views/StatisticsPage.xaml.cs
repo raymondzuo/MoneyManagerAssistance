@@ -4,9 +4,11 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -24,18 +26,15 @@ namespace MoneyManagerAssistance.Views
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class IncomeStatisticsPage : BasePage
+    public sealed partial class StatisticsPage : BasePage
     {
         PieChartViewModel viewModel;
         public StackingColumnChartViewModel ColumnViewModel { get; set; }
 
-        public IncomeStatisticsPage()
+        public StatisticsPage()
         {
             this.InitializeComponent();
-            viewModel = new PieChartViewModel();
-            this.PivotItem.DataContext = viewModel;
-            ColumnViewModel = new StackingColumnChartViewModel();
-            this.PivotItem1.DataContext = this;
+            
         }
 
         /// <summary>
@@ -46,6 +45,11 @@ namespace MoneyManagerAssistance.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            viewModel = new PieChartViewModel();
+            this.PivotItem.DataContext = viewModel;
+            ColumnViewModel = new StackingColumnChartViewModel();
+            this.PivotItem1.DataContext = this;
         }
 
 

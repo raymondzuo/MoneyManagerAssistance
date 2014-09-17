@@ -32,12 +32,14 @@ namespace MoneyManagerAssistance.SubViews
             switch (border.Tag.ToString())
             {
                 case "1":
-                    NavigationService.Navigate(typeof(In_OutTrendPage));
+                    NavigationService.Navigate(typeof(TrendPage));
                     break;
                 case "2":
-                    NavigationService.Navigate(typeof(IncomeStatisticsPage));
+                    NavigationService.Navigate(typeof(StatisticsPage));
                     break;
-
+                case "3":
+                    NavigationService.Navigate(typeof(CategoryPage));
+                    break;
             }
             
             

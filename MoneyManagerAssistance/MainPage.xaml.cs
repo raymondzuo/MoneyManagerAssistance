@@ -27,7 +27,7 @@ namespace MoneyManagerAssistance
     public sealed partial class MainPage : BasePage
     {
         private AppBarButton addNewAccountings;
-        private AppBarButton marktReviewButton;
+        private AppBarButton budgetButton;
         private AppBarButton bbsSearchButton;
         private AppBarButton jifenButton;
         //private AppBarButton refreshButton;
@@ -56,12 +56,12 @@ namespace MoneyManagerAssistance
             // 如果使用由某些模板提供的 NavigationHelper，
             // 则系统会为您处理该事件。
 
-            CreateDatabase.CreateLocalDatabase();
-            CreateDatabase.CreateAccountBookTable();
-            CreateDatabase.CreateAccountCategoryTable();
-            CreateDatabase.CreateAccountTable();
-            CreateDatabase.CreateMemberTable();
-            CreateDatabase.CreateSubAccountCategoryTable();
+            //CreateDatabase.CreateLocalDatabase();
+            //CreateDatabase.CreateAccountBookTable();
+            //CreateDatabase.CreateAccountCategoryTable();
+            //CreateDatabase.CreateAccountTable();
+            //CreateDatabase.CreateMemberTable();
+            //CreateDatabase.CreateSubAccountCategoryTable();
         }
 
         private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
@@ -91,11 +91,18 @@ namespace MoneyManagerAssistance
             addNewAccountings.Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBarIcon/Add-New.png", UriKind.RelativeOrAbsolute) };
             addNewAccountings.Click += (sender, args) =>
             {
-                
-                (Window.Current.Content as Frame).Navigate(typeof (AccountPage));
+                NavigationService.Navigate(typeof(AccountPage));   
+            };
+
+            budgetButton = new AppBarButton() { Label = "财务预算" };
+            budgetButton.Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBarIcon/Budget.png", UriKind.RelativeOrAbsolute) };
+            budgetButton.Click += (sender, args) =>
+            {
+                NavigationService.Navigate(typeof (BudgetPage));
             };
 
             appBar.PrimaryCommands.Add(addNewAccountings);
+            appBar.PrimaryCommands.Add(budgetButton);
             this.BottomAppBar = appBar;
             SetAppBarBackgroundColor();
         }
