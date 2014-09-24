@@ -28,6 +28,7 @@ namespace MoneyManagerAssistance.Views
     /// </summary>
     public sealed partial class StatisticsPage : BasePage
     {
+        
         PieChartViewModel viewModel;
         public StackingColumnChartViewModel ColumnViewModel { get; set; }
 
@@ -42,7 +43,7 @@ namespace MoneyManagerAssistance.Views
         /// </summary>
         /// <param name="e">描述如何访问此页的事件数据。
         /// 此参数通常用于配置页。</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 

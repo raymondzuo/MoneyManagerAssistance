@@ -29,11 +29,23 @@ namespace MoneyManagerAssistance.Views
     /// </summary>
     public sealed partial class TrendPage : BasePage
     {
+        DispatcherTimer delayLoader = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1) };
         private AppBarButton addNewAccountings;
         public TrendPage()
         {
             this.InitializeComponent();
+            this.Loaded += (o, args) => delayLoader.Start();
             InitAppBar();
+            delayLoader.Tick += timer_Tick;
+            this.lineChart.Opacity = 0;
+        }
+
+        void timer_Tick(object sender, object e)
+        {
+            delayLoader.Tick -= timer_Tick;
+            delayLoader.Stop();
+            lineChart.Opacity = 1;
+            
         }
 
         /// <summary>

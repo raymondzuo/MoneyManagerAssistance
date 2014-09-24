@@ -13,9 +13,11 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkID=390556 上有介绍
+using MoneyManagerAssistance.SubViews;
 using Raysoft.Phone.Common;
 
 namespace MoneyManagerAssistance.Views
@@ -29,6 +31,13 @@ namespace MoneyManagerAssistance.Views
         {
             this.InitializeComponent();
             this.DataContext = this;
+            this.AccoutTypeInput.AddHandler(TappedEvent, new TappedEventHandler(AccoutTypeInput_OnTapped), true);
+            this.Loaded += (sender, args) =>
+            {
+                var width = Window.Current.Bounds.Width;
+                //this.AccountTypeSelector.Margin = new Thickness(width - 50, 0, 0, 0);
+            };
+
         }
 
         /// <summary>
@@ -60,6 +69,37 @@ namespace MoneyManagerAssistance.Views
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        private void AccoutTypeInput_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            StoryboardPlay();
+        }
+
+        private void StoryboardPlay()
+        {
+            DoubleAnimation animation = new DoubleAnimation()
+            {
+                Duration = TimeSpan.FromMilliseconds(300),
+                From = 480,
+                To = 200
+            };
+
+            var selector = new AccountTypeSelector();
+            selector.RenderTransform = new CompositeTransform();
+
+            Storyboard.SetTarget(animation,selector);
+            Storyboard.SetTargetProperty(animation, "(UIElement.RenderTransform).(CompositeTransform.TranslateX)");
+
+            Storyboard sb  = new Storyboard();
+            sb.Children.Add(animation);
+            this.layout.Children.Add(selector);
+            Grid.SetRow(selector,2);
+            sb.Completed += (sender, o) =>
+            {
+                
+            };
+            sb.Begin();
         }
     }
 }

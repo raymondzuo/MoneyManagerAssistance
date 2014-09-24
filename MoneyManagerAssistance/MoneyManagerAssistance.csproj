@@ -98,6 +98,9 @@
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubViews\AccountTypeSelector.xaml.cs">
+      <DependentUpon>AccountTypeSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SubViews\MoneyGlance.xaml.cs">
       <DependentUpon>MoneyGlance.xaml</DependentUpon>
     </Compile>
@@ -185,6 +188,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="SubViews\AccountTypeSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SubViews\MoneyGlance.xaml">
       <SubType>Designer</SubType>

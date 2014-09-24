@@ -1,0 +1,91 @@
+﻿<UserControl
+    x:Class="MoneyManagerAssistance.SubViews.AccountTypeSelector"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MoneyManagerAssistance.SubViews"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ZoomedOutDataTemplate">
+            <Grid Height="45" HorizontalAlignment="Stretch" Margin="20,0,20,15" Width="200">
+                <TextBlock Text="{Binding Path=Group.MainType}" FontSize="20" Foreground="{StaticResource AppForegroundColorBrush}" TextTrimming="CharacterEllipsis"></TextBlock>
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="ZoomedInDataTemplate">
+            <Grid>
+                <TextBlock Text="{Binding}" FontSize="18" Foreground="{StaticResource AppForegroundColorBrush}"  TextTrimming="CharacterEllipsis"></TextBlock>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ZoomedInHeaderTemplate">
+            <Grid Background="Transparent" Margin="0,0,0,15">
+                <TextBlock Text="{Binding MainType}" Width="300" HorizontalAlignment="Left" Foreground="{StaticResource AppForegroundColorBrush}" TextTrimming="WordEllipsis" FontSize="24"></TextBlock>
+            </Grid>
+        </DataTemplate>
+
+        <CollectionViewSource x:Name="ViewSource" IsSourceGrouped="True" ItemsPath="SubType"></CollectionViewSource>
+
+        <Style x:Key="SemanticZoomStyle1" TargetType="SemanticZoom">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="TabNavigation" Value="Once"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="SemanticZoom">
+                        <Grid>
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                <Grid Margin="{TemplateBinding Padding}">
+                                    <ContentPresenter x:Name="ZoomedInPresenter" Content="{TemplateBinding ZoomedInView}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    <Popup x:Name="Popup">
+                                        <Popup.ChildTransitions >
+                                            <TransitionCollection>
+                                                <PopupThemeTransition/>
+                                            </TransitionCollection>
+                                        </Popup.ChildTransitions>
+                                        <Border x:Name="PopupBorder">
+                                            <ContentPresenter x:Name="ZoomedOutPresenter" Content="{TemplateBinding ZoomedOutView}" HorizontalAlignment="Right" Width="200" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        </Border>
+                                    </Popup>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid Width="200">
+        <SemanticZoom Style="{StaticResource SemanticZoomStyle1}">
+            <SemanticZoom.ZoomedOutView>
+                <ListView Background="#E5F0F1F5" Margin="0,20,0,20" Loaded="FrameworkElement_OnLoaded"
+                          ItemTemplate="{StaticResource ZoomedOutDataTemplate}" ItemsSource="{Binding Source={StaticResource ViewSource}, Path=View.CollectionGroups}"  >
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsStackPanel Orientation="Vertical"></ItemsStackPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+            </SemanticZoom.ZoomedOutView>
+            
+            <SemanticZoom.ZoomedInView>
+                <ListView ItemsSource="{Binding Source={StaticResource ViewSource}}" ItemTemplate="{StaticResource ZoomedInDataTemplate}">
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel Orientation="Vertical"></ItemsStackPanel>
+                    </ItemsPanelTemplate>
+                    <ListView.GroupStyle>
+                        <GroupStyle HeaderTemplate="{StaticResource ZoomedInHeaderTemplate}"></GroupStyle>
+                    </ListView.GroupStyle>
+                </ListView>
+            </SemanticZoom.ZoomedInView>
+        </SemanticZoom>
+    </Grid>
+</UserControl>

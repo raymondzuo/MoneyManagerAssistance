@@ -8,6 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:subview="using:MoneyManagerAssistance.SubViews"
+    xmlns:charts="using:Syncfusion.UI.Xaml.Charts"
+    xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
     Background="{ThemeResource AppBackgroundColorBrush}">
     <Page.Resources>
         <Style TargetType="MenuFlyoutPresenter" x:Key="ThisFlyoutPresenter">
@@ -56,9 +58,17 @@
             
             <HubSection Name="MoreHubSec" Header="更多" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}">
                <DataTemplate>
-                   <subview:More></subview:More>
+                   <!--<subview:More></subview:More>-->
+                   <subview:AccountTypeSelector></subview:AccountTypeSelector>
                </DataTemplate>
             </HubSection>
         </Hub>
+        
+        <!-- 为了加快进入2级页面，在此提前加载sf控件,会消耗一些应用加载时间-->
+        <charts:SfChart x:Name="DoughnutChart"  AreaBorderThickness="0" FontSize="20" HorizontalAlignment="Center" Margin="10" Visibility="Collapsed"/>
+        <input:SfDateTimeCombo Visibility="Collapsed"/>
+        <charts:LineSeries Visibility="Collapsed"/>
+        <charts:ColumnSeries Visibility="Collapsed"/>
+        <charts:StackingColumnSeries  Visibility="Collapsed"/>
     </Grid>
 </Base:BasePage>
