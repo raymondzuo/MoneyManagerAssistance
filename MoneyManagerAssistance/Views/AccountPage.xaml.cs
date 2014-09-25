@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,17 +28,13 @@ namespace MoneyManagerAssistance.Views
     /// </summary>
     public sealed partial class AccountPage : BasePage,INotifyPropertyChanged
     {
+        private AccountTypeSelector selector;
+        
         public AccountPage()
         {
             this.InitializeComponent();
             this.DataContext = this;
             this.AccoutTypeInput.AddHandler(TappedEvent, new TappedEventHandler(AccoutTypeInput_OnTapped), true);
-            this.Loaded += (sender, args) =>
-            {
-                var width = Window.Current.Bounds.Width;
-                //this.AccountTypeSelector.Margin = new Thickness(width - 50, 0, 0, 0);
-            };
-
         }
 
         /// <summary>
@@ -49,6 +46,20 @@ namespace MoneyManagerAssistance.Views
         {
             base.OnNavigatedTo(e);
         }
+
+        protected override void OnBackKeyPress(BackPressedEventArgs e)
+        {
+            if (this.selector != null && this.layout.Children.Contains(selector))
+            {
+                HideStoryboardPlay();
+                e.Handled = true;
+            }
+            else
+            {
+                base.OnBackKeyPress(e);
+            }
+        }
+
 
         private String dateformatString = "M/d/yyyy";
 
@@ -78,15 +89,26 @@ namespace MoneyManagerAssistance.Views
 
         private void StoryboardPlay()
         {
+            if (selector != null && this.layout.Children.Contains(selector))
+            {
+                return;
+            }
+
             DoubleAnimation animation = new DoubleAnimation()
             {
                 Duration = TimeSpan.FromMilliseconds(300),
-                From = 480,
-                To = 200
+                From = Window.Current.Bounds.Width,
+                To = Window.Current.Bounds.Width - 210
             };
 
-            var selector = new AccountTypeSelector();
+            selector = new AccountTypeSelector();
             selector.RenderTransform = new CompositeTransform();
+            selector.SelectTappedEvent += (sender, args) =>
+            {
+                var item = args;
+                this.AccoutTypeInput.Text = args;
+            };
+            
 
             Storyboard.SetTarget(animation,selector);
             Storyboard.SetTargetProperty(animation, "(UIElement.RenderTransform).(CompositeTransform.TranslateX)");
@@ -94,12 +116,49 @@ namespace MoneyManagerAssistance.Views
             Storyboard sb  = new Storyboard();
             sb.Children.Add(animation);
             this.layout.Children.Add(selector);
-            Grid.SetRow(selector,2);
+            Grid.SetRow(selector,0);
+            Grid.SetRowSpan(selector,3);
             sb.Completed += (sender, o) =>
             {
                 
             };
             sb.Begin();
+        }
+
+        private void HideStoryboardPlay()
+        {
+            if (selector == null || !this.layout.Children.Contains(selector))
+            {
+                return;
+            }
+
+            DoubleAnimation animation = new DoubleAnimation()
+            {
+                Duration = TimeSpan.FromMilliseconds(300),
+                To = Window.Current.Bounds.Width
+            };
+
+            Storyboard.SetTarget(animation, selector);
+            Storyboard.SetTargetProperty(animation, "(UIElement.RenderTransform).(CompositeTransform.TranslateX)");
+
+            Storyboard sb = new Storyboard();
+            sb.Children.Add(animation);
+            sb.Completed += (sender, o) => this.layout.Children.Remove(selector);
+            
+            sb.Begin();
+        }
+
+        private void Layout_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (selector != null)
+            {
+                var position = e.GetPosition(sender as Grid);
+                if (position.X < Window.Current.Bounds.Width - 210)
+                {
+                    HideStoryboardPlay();
+                    selector.CollapsedOutView();
+                }
+            }
         }
     }
 }

@@ -24,7 +24,7 @@
         </Storyboard>
     </Page.Resources>
 
-    <Grid Margin="10 0 10 0" x:Name="layout">
+    <Grid Margin="10 0 10 0" x:Name="layout" Tapped="Layout_OnTapped">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -88,7 +88,7 @@
 
                 <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="5" Grid.ColumnSpan="3"></StackPanel>
 
-                <TextBlock Text="项目"  Grid.Row="6" Grid.Column="0" Style="{StaticResource TbStyle}" Tapped="AccoutTypeInput_OnTapped"></TextBlock>
+                <TextBlock Text="项目"  Grid.Row="6" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
                 <TextBox x:Name="AccoutTypeInput" Width="300" Grid.Row="6" Grid.Column="1"  Text="交通消费" IsReadOnly="True"
                          Foreground="{StaticResource AppForegroundColorBrush}" FontSize="20" Margin="15 5 0 5" HorizontalAlignment="Left">
                     

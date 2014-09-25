@@ -22,6 +22,8 @@ namespace MoneyManagerAssistance.SubViews
     public sealed partial class AccountTypeSelector : UserControl
     {
         private ObservableCollection<TypeInfo> TypeGroups;
+        public EventHandler<string> SelectTappedEvent;
+
         public AccountTypeSelector()
         {
             this.InitializeComponent();
@@ -34,6 +36,12 @@ namespace MoneyManagerAssistance.SubViews
             TypeGroups.Add(new TypeInfo() { MainType = "餐饮", SubType = new List<string>() { "餐馆消费", "啤酒", "饮料" } });
 
             (this.Resources["ViewSource"] as CollectionViewSource).Source = TypeGroups;
+        }
+
+        public void CollapsedOutView()
+        {
+            this.SemanticZoom.IsZoomedInViewActive = true;
+            
         }
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
@@ -71,6 +79,16 @@ namespace MoneyManagerAssistance.SubViews
         //    return groups;
 
         //}
+
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = sender as ListView;
+            var item = listView.SelectedItem.ToString();
+            if (SelectTappedEvent != null)
+            {
+                SelectTappedEvent(sender, item);
+            }
+        }
     }
 
 
