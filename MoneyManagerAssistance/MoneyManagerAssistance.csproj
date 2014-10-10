@@ -113,6 +113,7 @@
     <Compile Include="SubViews\Tools.xaml.cs">
       <DependentUpon>Tools.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AccoutViewModel.cs" />
     <Compile Include="Views\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
     </Compile>
@@ -234,6 +235,10 @@
     <ProjectReference Include="..\MoneyManagerAssistance.Database\Raysoft.Database.csproj">
       <Project>{d29e906e-a763-4fed-bc25-c03dc8bb2e8f}</Project>
       <Name>Raysoft.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Raysoft.ModelLib\Raysoft.ModelLib.csproj">
+      <Project>{dd47023c-5107-42a3-b10c-c759158e25e2}</Project>
+      <Name>Raysoft.ModelLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\Raysoft.Phone.Common\Raysoft.Phone.Common.csproj">
       <Project>{4ab72d25-796d-4653-82c6-6c02424aa5f8}</Project>

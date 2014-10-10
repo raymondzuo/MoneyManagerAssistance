@@ -19,6 +19,8 @@ using Windows.UI.Xaml.Navigation;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkID=390556 上有介绍
 using MoneyManagerAssistance.SubViews;
+using MoneyManagerAssistance.ViewModels;
+using Raysoft.ModelLib;
 using Raysoft.Phone.Common;
 
 namespace MoneyManagerAssistance.Views
@@ -26,15 +28,18 @@ namespace MoneyManagerAssistance.Views
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class AccountPage : BasePage,INotifyPropertyChanged
+    public sealed partial class AccountPage : BasePage
     {
         private AccountTypeSelector selector;
+        private AccoutViewModel viewModel;
         
         public AccountPage()
         {
             this.InitializeComponent();
-            this.DataContext = this;
+            viewModel = new AccoutViewModel();
+            this.DataContext = viewModel;
             this.AccoutTypeInput.AddHandler(TappedEvent, new TappedEventHandler(AccoutTypeInput_OnTapped), true);
+            
         }
 
         /// <summary>
@@ -60,27 +65,6 @@ namespace MoneyManagerAssistance.Views
             }
         }
 
-
-        private String dateformatString = "M/d/yyyy";
-
-        public String DateFormat
-        {
-            get { return dateformatString; }
-            set
-            {
-                dateformatString = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
 
         private void AccoutTypeInput_OnTapped(object sender, TappedRoutedEventArgs e)
         {
@@ -159,6 +143,23 @@ namespace MoneyManagerAssistance.Views
                     selector.CollapsedOutView();
                 }
             }
+        }
+
+        private void SaveAppBarButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var accountRec = new AccoutRecordModel()
+            {
+                AccountDate = (DateTime)DP1.Value,
+                MemberId = 1,
+                AccountType = 1,
+                SubCategoryId = 1,
+                AccountSum = int.Parse(this.AccountSumTextBox.Text),
+                AccountSourceType = 1,
+                Description = this.AccountDesTextBox.Text,
+                ABookId = 1,
+            };
+
+            viewModel.SaveAccountRecord(accountRec);
         }
     }
 }

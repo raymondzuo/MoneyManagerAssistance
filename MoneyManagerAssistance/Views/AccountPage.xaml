@@ -65,7 +65,7 @@
                 <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="1" Grid.ColumnSpan="3"></StackPanel>
 
                 <TextBlock Text="选择成员"  Grid.Row="2" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
-                <ComboBox SelectedIndex="0" Grid.Row="2" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
+                <ComboBox x:Name="MemberComboBox" SelectedIndex="0" Grid.Row="2" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
                           BorderThickness="1" Width="300" HorizontalAlignment="Left" Margin="15 0 0 0">
                     <ComboBox.Items>
                         <TextBlock Text="本人" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
@@ -78,7 +78,7 @@
                 <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="3" Grid.ColumnSpan="3"></StackPanel>
 
                 <TextBlock Text="账目类别"  Grid.Row="4" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
-                <ComboBox SelectedIndex="0" Grid.Row="4" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
+                <ComboBox x:Name="AcntCategoryComboBox" SelectedIndex="0" Grid.Row="4" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
                           BorderThickness="1" Width="300" HorizontalAlignment="Left" Margin="15 0 0 0">
                     <ComboBox.Items>
                         <TextBlock Text="收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
@@ -97,7 +97,7 @@
                 <StackPanel Style="{StaticResource SpStyle}" Grid.Row="7" Grid.ColumnSpan="3"></StackPanel>
                 
                 <TextBlock Text="金额"  Grid.Row="8" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
-                <TextBox InputScope="Number" Width="300" Grid.Row="8" Grid.Column="1" 
+                <TextBox x:Name="AccountSumTextBox" InputScope="Number" Width="300" Grid.Row="8" Grid.Column="1" 
                          Foreground="{StaticResource AppForegroundColorBrush}" FontSize="20" Margin="15 5 0 5" HorizontalAlignment="Left"></TextBox>
                 <Image Source="../Assets/AppBarIcon/DeviceCalculator.png" Width="40" Height="40" Grid.Row="8" Grid.Column="2" HorizontalAlignment="Left" Margin="0 0 10 0">
                     <Image.Transitions>
@@ -110,7 +110,7 @@
                 <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="9" Grid.ColumnSpan="3"></StackPanel>
 
                 <TextBlock Text="选择账户"  Grid.Row="10" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
-                <ComboBox SelectedIndex="0" Grid.Row="10" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
+                <ComboBox x:Name="AccountSrcComboBox" SelectedIndex="0" Grid.Row="10" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
                           BorderThickness="1" Width="300" HorizontalAlignment="Left" Margin="15 0 0 0">
                     <ComboBox.Items>
                         <TextBlock Text="现金" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
@@ -122,7 +122,7 @@
                 <StackPanel Style="{StaticResource SpStyle}" Grid.Row="11" Grid.ColumnSpan="3"></StackPanel>
 
                 <TextBlock Text="备注"  Grid.Row="12" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
-                <TextBox Width="300" Grid.Row="12" Grid.Column="1" AcceptsReturn="True" Height="200" TextWrapping="Wrap"
+                <TextBox x:Name="AccountDesTextBox" Width="300" Grid.Row="12" Grid.Column="1" AcceptsReturn="True" Height="200" TextWrapping="Wrap"
                          Foreground="{StaticResource AppForegroundColorBrush}" FontSize="20" Margin="15 5 0 5" HorizontalAlignment="Left"></TextBox>
             </Grid>
         </ScrollViewer>
@@ -132,7 +132,7 @@
     <Page.BottomAppBar>
         <CommandBar Foreground="{StaticResource AppForegroundColorBrush}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="保存">
+                <AppBarButton x:Name="SaveAppBarButton" Label="保存" Click="SaveAppBarButton_OnClick">
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="../Assets/AppBarIcon/Save.png"></BitmapIcon>
                     </AppBarButton.Icon>
