@@ -15,8 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-
-// “空白应用程序”模板在 http://go.microsoft.com/fwlink/?LinkId=391641 上有介绍
+using Raysoft.Database;
 
 namespace MoneyManagerAssistance
 {
@@ -43,7 +42,7 @@ namespace MoneyManagerAssistance
         /// 将使用其他入口点。
         /// </summary>
         /// <param name="e">有关启动请求和过程的详细信息。</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
@@ -99,6 +98,20 @@ namespace MoneyManagerAssistance
 
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
+
+            await DbHelper.InitOrOpenDatabase();
+            await DbHelper.CreateAccountTable();
+            await DbHelper.CreateAccountBookTable();
+            await DbHelper.CreateAccountCategoryTable();
+            await DbHelper.CreateAccountSourceTable();
+            await DbHelper.CreateMemberTable();
+            await DbHelper.CreateSubAccountCategoryTable();
+
+            await DbHelper.InitMemberData();
+            await DbHelper.InitAccountBook();
+            await DbHelper.IniAccoutSourceData();
+            await DbHelper.InitAccountCategoryData();
+            await DbHelper.InitSubAccountCategoryData();
         }
 
         /// <summary>

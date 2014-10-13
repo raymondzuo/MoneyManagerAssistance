@@ -58,9 +58,8 @@
             
             <HubSection Name="MoreHubSec" Header="更多" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}">
                <DataTemplate>
-                   <!--<subview:More></subview:More>-->
-                   <subview:AccountTypeSelector></subview:AccountTypeSelector>
-               </DataTemplate>
+                    <subview:More></subview:More>
+                </DataTemplate>
             </HubSection>
         </Hub>
         

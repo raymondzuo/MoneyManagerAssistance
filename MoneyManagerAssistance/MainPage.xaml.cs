@@ -48,6 +48,7 @@ namespace MoneyManagerAssistance
         /// 此参数通常用于配置页。</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
             // TODO: 准备此处显示的页面。
 
             // TODO: 如果您的应用程序包含多个页面，请确保

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -80,14 +81,14 @@ namespace Raysoft.Database
         private static SQLiteConnection conn;
 
         #region 创建数据表
-        public static async void InitOrOpenDatabase()
+        public static async Task InitOrOpenDatabase()
         {
             var dbFolder = await StorageHelper.CreateLocalFolder("DataFolder");
             conn = new SQLiteConnection("DataFolder/MyAccount.db");
         }
 
 
-        public static void CreateAccountBookTable()
+        public static async Task CreateAccountBookTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateAccountBookTable))
             {
@@ -95,7 +96,7 @@ namespace Raysoft.Database
             }
         }
 
-        public static void CreateAccountSourceTable()
+        public static async Task CreateAccountSourceTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateAccoutSourceTable))
             {
@@ -103,7 +104,7 @@ namespace Raysoft.Database
             }
         }
 
-        public static void CreateMemberTable()
+        public static async Task CreateMemberTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateMemberTable))
             {
@@ -111,7 +112,7 @@ namespace Raysoft.Database
             }
         }
 
-        public static void CreateAccountCategoryTable()
+        public static async Task CreateAccountCategoryTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateAccountCategoryTable))
             {
@@ -119,7 +120,7 @@ namespace Raysoft.Database
             }
         }
 
-        public static void CreateSubAccountCategoryTable()
+        public static async Task CreateSubAccountCategoryTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateSubAccountCategoryTable))
             {
@@ -133,7 +134,7 @@ namespace Raysoft.Database
             }
         }
 
-        public static void CreateAccountTable()
+        public static async Task CreateAccountTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateAccountTable))
             {
@@ -153,9 +154,144 @@ namespace Raysoft.Database
 
         public static async Task<bool> InitMemberData()
         {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    using (var member = conn.Prepare("INSERT INTO Member (Name, Description) VALUES (?, ?)"))
+                    {
+                        member.Bind(1, "自己");
+                        member.Bind(2, "我自己");
+
+
+                        var result = member.Step();
+                        var rs = result.ToString();
+                    }
+                }
+                );
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+
             return false;
         }
 
+        public static async Task<bool> InitAccountBook()
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    using (var abook = conn.Prepare("INSERT INTO AccountBook (Name, CreateTime, Description) VALUES (?, ?, ?)"))
+                    {
+                        abook.Bind(1, "账本1");
+                        abook.Bind(2, "2014-05-01");
+                        abook.Bind(3, "我自己用");
+
+
+                        var result = abook.Step();
+                        var rs = result.ToString();
+                    }
+                }
+                );
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+
+            return false;
+        }
+
+        public static async Task<bool> IniAccoutSourceData()
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    using (var accoutSource = conn.Prepare("INSERT INTO AccoutSource (Name, Description) VALUES (?, ?)"))
+                    {
+                        accoutSource.Bind(1, "现金");
+                        accoutSource.Bind(2, "已有现金");
+
+
+                        var result = accoutSource.Step();
+                        var rs = result.ToString();
+                    }
+                }
+                );
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+
+            return false;
+        }
+
+        public static async Task<bool> InitAccountCategoryData()
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    using (var member = conn.Prepare("INSERT INTO AccountCategory (Name, CategoryType) VALUES (?, ?)"))
+                    {
+                        member.Bind(1, "吃饭消费");
+                        member.Bind(2, "1");
+
+
+                        var result = member.Step();
+                        var rs = result.ToString();
+                    }
+                }
+                );
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+
+            return false;
+        }
+
+        public static async Task<bool> InitSubAccountCategoryData()
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    using (var member = conn.Prepare("INSERT INTO SubAccountCategory (Name, CategoryId) VALUES (?, ?)"))
+                    {
+                        member.Bind(1, "餐馆");
+                        member.Bind(2, "1");
+
+
+                        var result = member.Step();
+                        var rs = result.ToString();
+                    }
+                }
+                );
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+
+            return false;
+        }
         /// <summary>
         /// 插入一条新账目
         /// </summary>
@@ -167,16 +303,44 @@ namespace Raysoft.Database
             {
                 await Task.Run(() =>
                 {
-                    using (var account = conn.Prepare("INSERT INTO Account (AccountDate, AccountSum, Description, SubCategoryId, MemberId, ABookId) VALUES (?, ?, ?, ?, ?, ?)"))
+                    using (var account = conn.Prepare("INSERT INTO Account (AccountDate, AccountSum, Description, SubCategoryId, MemberId, ABookId, AccountSourceId, AccountType) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"))
                     {
-                        account.Bind(1,accoutRecord.AccountDate);
-                        account.Bind(2,accoutRecord.AccountSum);
+                        account.ClearBindings();
+                        account.Reset();
+                        
+                        account.Bind(1, accoutRecord.AccountDate);
+                        account.Bind(2, accoutRecord.AccountSum);
                         account.Bind(3, accoutRecord.Description);
                         account.Bind(4, accoutRecord.SubCategoryId);
                         account.Bind(5, accoutRecord.MemberId);
                         account.Bind(6, accoutRecord.ABookId);
+                        account.Bind(7, accoutRecord.AccountSourceType);
+                        account.Bind(8, accoutRecord.AccountType);
+                        
+                        var result = account.Step();
+                        var rs = result.ToString();
+                    }
+                }
+                );
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
 
-                        account.Step();
+            return true;
+        }
+
+        public static async Task<bool> QueryAccount()
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    using (var account = conn.Prepare("Select * From Account"))
+                    {
+                        var result = account.Step();
+                        var rs = result.ToString();
                     }
                 }
                 );

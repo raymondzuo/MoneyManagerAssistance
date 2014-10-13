@@ -145,11 +145,11 @@ namespace MoneyManagerAssistance.Views
             }
         }
 
-        private void SaveAppBarButton_OnClick(object sender, RoutedEventArgs e)
+        private async void SaveAppBarButton_OnClick(object sender, RoutedEventArgs e)
         {
             var accountRec = new AccoutRecordModel()
             {
-                AccountDate = (DateTime)DP1.Value,
+                AccountDate = ((DateTime)DP1.Value).Date.ToString("yyyy-MM-dd HH:mm:ss"),
                 MemberId = 1,
                 AccountType = 1,
                 SubCategoryId = 1,
@@ -159,7 +159,13 @@ namespace MoneyManagerAssistance.Views
                 ABookId = 1,
             };
 
-            viewModel.SaveAccountRecord(accountRec);
+            await viewModel.SaveAccountRecord(accountRec);
+        }
+
+
+        private async void SaveAndBackBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            await viewModel.GetAllAccountRecords();
         }
     }
 }

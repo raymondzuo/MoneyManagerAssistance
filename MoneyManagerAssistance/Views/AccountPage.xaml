@@ -137,7 +137,7 @@
                         <BitmapIcon UriSource="../Assets/AppBarIcon/Save.png"></BitmapIcon>
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton Label="保存返回">
+                <AppBarButton x:Name="SaveAndBackBtn" Label="保存返回" Click="SaveAndBackBtn_OnClick">
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="../Assets/AppBarIcon/CommandUndo.png"></BitmapIcon>
                     </AppBarButton.Icon>

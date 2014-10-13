@@ -16,7 +16,7 @@ namespace Raysoft.ModelLib
         /// <summary>
         /// 账目日期
         /// </summary>
-        public DateTime AccountDate { get; set; }
+        public string AccountDate { get; set; }
 
         /// <summary>
         /// 账目金额
