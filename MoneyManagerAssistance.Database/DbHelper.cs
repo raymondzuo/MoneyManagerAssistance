@@ -341,6 +341,13 @@ namespace Raysoft.Database
                     {
                         var result = account.Step();
                         var rs = result.ToString();
+                        var count = account.DataCount;
+                        for (int i = 0; i < account.DataCount; i++)
+                        {
+                            var a = account[1];
+                        }
+
+                        
                     }
                 }
                 );

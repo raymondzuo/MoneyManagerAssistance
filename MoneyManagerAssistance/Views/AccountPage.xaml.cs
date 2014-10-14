@@ -19,7 +19,6 @@ using Windows.UI.Xaml.Navigation;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkID=390556 上有介绍
 using MoneyManagerAssistance.SubViews;
-using MoneyManagerAssistance.ViewModels;
 using Raysoft.ModelLib;
 using Raysoft.Phone.Common;
 
@@ -31,13 +30,11 @@ namespace MoneyManagerAssistance.Views
     public sealed partial class AccountPage : BasePage
     {
         private AccountTypeSelector selector;
-        private AccoutViewModel viewModel;
+        
         
         public AccountPage()
         {
             this.InitializeComponent();
-            viewModel = new AccoutViewModel();
-            this.DataContext = viewModel;
             this.AccoutTypeInput.AddHandler(TappedEvent, new TappedEventHandler(AccoutTypeInput_OnTapped), true);
             
         }
@@ -159,13 +156,13 @@ namespace MoneyManagerAssistance.Views
                 ABookId = 1,
             };
 
-            await viewModel.SaveAccountRecord(accountRec);
+            //await viewModel.SaveAccountRecord(accountRec);
         }
 
 
         private async void SaveAndBackBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            await viewModel.GetAllAccountRecords();
+            //await viewModel.GetAllAccountRecords();
         }
     }
 }

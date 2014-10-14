@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raysoft.Phone.Common", "Ray
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raysoft.ModelLib", "Raysoft.ModelLib\Raysoft.ModelLib.csproj", "{DD47023C-5107-42A3-B10C-C759158E25E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManagerAssistance.ViewModel", "MoneyManagerAssistance.ViewModel\MoneyManagerAssistance.ViewModel.csproj", "{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,22 @@ Global
 		{DD47023C-5107-42A3-B10C-C759158E25E2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DD47023C-5107-42A3-B10C-C759158E25E2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DD47023C-5107-42A3-B10C-C759158E25E2}.Release|x86.ActiveCfg = Release|Any CPU
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Debug|ARM.ActiveCfg = Debug|ARM
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Debug|ARM.Build.0 = Debug|ARM
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Debug|x86.ActiveCfg = Debug|x86
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Debug|x86.Build.0 = Debug|x86
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Release|ARM.ActiveCfg = Release|ARM
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Release|ARM.Build.0 = Release|ARM
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Release|Mixed Platforms.Build.0 = Release|x86
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Release|x86.ActiveCfg = Release|x86
+		{BD46F4F8-D57A-4F51-9A1E-9980A9DAE923}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
