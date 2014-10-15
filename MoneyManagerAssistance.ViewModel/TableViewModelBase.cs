@@ -186,6 +186,35 @@ namespace MoneyManagerAssistance.ViewModel
             Timestamp = DateTime.Now;
         }
 
+        protected override string GetUpdateItemColumnsSql(List<string> columnNameList)
+        {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append("UPDATE Books SET ");
+
+            foreach (var columnName in columnNameList)
+            {
+                stringBuilder.Append(columnName + " = ?,");
+            }
+
+            stringBuilder.Remove(stringBuilder.Length - 1, 1);
+            stringBuilder.Append(" WHERE BookId = ? AND SiteId = ?");
+
+            return stringBuilder.ToString();
+        }
+
+        protected override void FillUpdateColumnsStatement(ISQLiteStatement statement, Tuple<long, long> key, Dictionary<string, object> columnKeyValue)
+        {
+            int i = 1;
+
+            foreach (var kv in columnKeyValue)
+            {
+                statement.Bind(i, kv.Value);
+                i++;
+            }
+
+            statement.Bind(i, key.Item1);
+            statement.Bind(i + 1, key.Item2);
+        }
         #endregion
     }
 }
