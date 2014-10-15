@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Raysoft.Phone.Common;
 using SQLitePCL;
 
-namespace MoneyManagerAssistance.ViewModel
+namespace Raysoft.Database
 {
-    public abstract class TableViewModelBase<TItemType, TKeyType>:BaseViewModel
+    public abstract class BaseTableDbLogicLayer<TItemType, TKeyType>
     {
         #region 抽象类定义
         /// <summary>
@@ -78,6 +75,22 @@ namespace MoneyManagerAssistance.ViewModel
         /// <param name="key"></param>
         /// <param name="item"></param>
         protected abstract void FillUpdateStatement(ISQLiteStatement statement, TKeyType key, TItemType item);
+
+        /// <summary>
+        /// 获取更新某几个字段的sql
+        /// </summary>
+        /// <returns></returns>
+        protected abstract string GetUpdateItemColumnsSql();
+
+        /// <summary>
+        /// 填充更新某几个字段的sql所需参数。
+        /// </summary>
+        /// <param name="statement"></param>
+        /// <param name="key"></param>
+        /// <param name="columnKeyValue"></param>
+        protected abstract void FillUpdateColumnsStatement(ISQLiteStatement statement, TKeyType key,
+            Dictionary<string, object> columnKeyValue);
+
 
         #endregion
 
@@ -186,7 +199,7 @@ namespace MoneyManagerAssistance.ViewModel
             Timestamp = DateTime.Now;
         }
 
-        protected override string GetUpdateItemColumnsSql(List<string> columnNameList)
+        protected string GetUpdateItemColumnsSql(List<string> columnNameList)
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("UPDATE Books SET ");
@@ -202,7 +215,7 @@ namespace MoneyManagerAssistance.ViewModel
             return stringBuilder.ToString();
         }
 
-        protected override void FillUpdateColumnsStatement(ISQLiteStatement statement, Tuple<long, long> key, Dictionary<string, object> columnKeyValue)
+        protected void FillUpdateColumnsStatement(ISQLiteStatement statement, Tuple<long, long> key, Dictionary<string, object> columnKeyValue)
         {
             int i = 1;
 

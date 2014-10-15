@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MoneyManagerAssistance.ViewModel;
 using Raysoft.ModelLib;
 using Raysoft.Phone.Common;
 using SQLitePCL;
 
-namespace MoneyManagerAssistance.ViewModels
+namespace MoneyManagerAssistance.ViewModel
 {
-    public class AccoutViewModel : TableViewModelBase<AccoutRecordModel, long>
+    public class AccoutViewModel : BaseViewModel
     {
         private String dateformatString = "M/d/yyyy";
 
@@ -39,60 +38,6 @@ namespace MoneyManagerAssistance.ViewModels
             //var result = await DbHelper.QueryAccount();
             return true;
         }
-
-        protected override string GetSelectAllSql()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void FillSelectAllStatement(ISQLiteStatement statement)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override AccoutRecordModel CreateItem(ISQLiteStatement statement)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override string GetSelectItemSql()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void FillSelectItemStatement(ISQLiteStatement statement, long key)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override string GetDeleteItemSql()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void FillDeleteItemStatement(ISQLiteStatement statement, long key)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override string GetInsertItemSql()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void FillInsertStatement(ISQLiteStatement statement, AccoutRecordModel item)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override string GetUpdateItemSql()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void FillUpdateStatement(ISQLiteStatement statement, long key, AccoutRecordModel item)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
