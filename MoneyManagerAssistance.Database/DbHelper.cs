@@ -40,6 +40,13 @@ namespace Raysoft.Database
                                                               AccoutSource(    Id    INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                                                                                Name    VARCHAR( 140 ),
                                                                                Description VARCHAR( 200 ) );";
+        /// <summary>
+        /// 创建账户类型表的sql，比如（收入，支出，借贷等）
+        /// </summary>
+        private const string sqlOfCreateAccoutTypeTable = @"CREATE TABLE IF NOT EXISTS
+                                                            AccoutType(Id    INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                                                       Name    VARCHAR( 140 ),
+                                                                       Description VARCHAR( 200 ) );";
 
         /// <summary>
         /// 创建财务分类的sql
@@ -99,6 +106,14 @@ namespace Raysoft.Database
         public static async Task CreateAccountSourceTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateAccoutSourceTable))
+            {
+                statement.Step();
+            }
+        }
+
+        public static async Task CreateAccountTypeTable()
+        {
+            using (var statement = conn.Prepare(sqlOfCreateAccoutTypeTable))
             {
                 statement.Step();
             }
@@ -297,7 +312,7 @@ namespace Raysoft.Database
         /// </summary>
         /// <param name="accoutRecord"></param>
         /// <returns></returns>
-        public static async Task<bool> InsertAccount(AccoutRecordModel accoutRecord)
+        public static async Task<bool> InsertAccount(Accout accoutRecord)
         {
             try
             {

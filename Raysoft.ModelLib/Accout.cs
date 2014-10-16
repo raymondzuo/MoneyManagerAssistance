@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Raysoft.ModelLib
 {
-    public class AccoutRecordModel
+    public class Accout:ModelBase
     {
         /// <summary>
         /// 账目id

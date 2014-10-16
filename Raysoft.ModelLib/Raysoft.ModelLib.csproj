@@ -41,9 +41,15 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccoutRecordModel.cs" />
+    <Compile Include="AccountBook.cs" />
+    <Compile Include="AccountCategory.cs" />
+    <Compile Include="AccountType.cs" />
+    <Compile Include="Accout.cs" />
+    <Compile Include="AccoutSource.cs" />
+    <Compile Include="Member.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubAccountCategory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

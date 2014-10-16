@@ -27,7 +27,7 @@ namespace MoneyManagerAssistance.ViewModel
         /// 保存一条新的账目记录
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> SaveAccountRecord(AccoutRecordModel accoutRecord)
+        public async Task<bool> SaveAccountRecord(Accout accoutRecord)
         {
             //var result = await DbHelper.InsertAccount(accoutRecord);
             return true;

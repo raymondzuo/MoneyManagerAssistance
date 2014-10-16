@@ -144,7 +144,7 @@ namespace MoneyManagerAssistance.Views
 
         private async void SaveAppBarButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var accountRec = new AccoutRecordModel()
+            var accountRec = new Accout()
             {
                 AccountDate = ((DateTime)DP1.Value).Date.ToString("yyyy-MM-dd HH:mm:ss"),
                 MemberId = 1,
