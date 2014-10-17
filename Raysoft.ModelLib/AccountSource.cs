@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Raysoft.ModelLib
 {
-    public class AccoutSource : ModelBase
+    public class AccountSource : ModelBase
     {
         /// <summary>
         /// 账户来源

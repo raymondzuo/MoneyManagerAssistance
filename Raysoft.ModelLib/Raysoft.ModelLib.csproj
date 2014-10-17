@@ -44,8 +44,8 @@
     <Compile Include="AccountBook.cs" />
     <Compile Include="AccountCategory.cs" />
     <Compile Include="AccountType.cs" />
-    <Compile Include="Accout.cs" />
-    <Compile Include="AccoutSource.cs" />
+    <Compile Include="Account.cs" />
+    <Compile Include="AccountSource.cs" />
     <Compile Include="Member.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

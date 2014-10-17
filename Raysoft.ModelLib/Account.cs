@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Raysoft.ModelLib
 {
-    public class Accout:ModelBase
+    public class Account:ModelBase
     {
         /// <summary>
         /// 账目id
@@ -16,7 +16,7 @@ namespace Raysoft.ModelLib
         /// <summary>
         /// 账目日期
         /// </summary>
-        public string AccountDate { get; set; }
+        public DateTime AccountDate { get; set; }
 
         /// <summary>
         /// 账目金额
@@ -36,7 +36,7 @@ namespace Raysoft.ModelLib
         /// <summary>
         /// 账目来源（支付宝/现金/银行卡）
         /// </summary>
-        public int AccountSourceType { get; set; }
+        public int AccountSourceId { get; set; }
 
         /// <summary>
         /// 账目子类别

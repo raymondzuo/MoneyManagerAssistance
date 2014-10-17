@@ -312,7 +312,7 @@ namespace Raysoft.Database
         /// </summary>
         /// <param name="accoutRecord"></param>
         /// <returns></returns>
-        public static async Task<bool> InsertAccount(Accout accoutRecord)
+        public static async Task<bool> InsertAccount(Account accoutRecord)
         {
             try
             {
@@ -329,7 +329,7 @@ namespace Raysoft.Database
                         account.Bind(4, accoutRecord.SubCategoryId);
                         account.Bind(5, accoutRecord.MemberId);
                         account.Bind(6, accoutRecord.ABookId);
-                        account.Bind(7, accoutRecord.AccountSourceType);
+                        account.Bind(7, accoutRecord.AccountSourceId);
                         account.Bind(8, accoutRecord.AccountType);
                         
                         var result = account.Step();

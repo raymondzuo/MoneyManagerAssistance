@@ -80,7 +80,7 @@ namespace Raysoft.Database
         /// 获取更新某几个字段的sql
         /// </summary>
         /// <returns></returns>
-        protected abstract string GetUpdateItemColumnsSql();
+        protected abstract string GetUpdateItemColumnsSql(List<string> columnNameList);
 
         /// <summary>
         /// 填充更新某几个字段的sql所需参数。
@@ -198,36 +198,7 @@ namespace Raysoft.Database
             }
             Timestamp = DateTime.Now;
         }
-
-        protected string GetUpdateItemColumnsSql(List<string> columnNameList)
-        {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append("UPDATE Books SET ");
-
-            foreach (var columnName in columnNameList)
-            {
-                stringBuilder.Append(columnName + " = ?,");
-            }
-
-            stringBuilder.Remove(stringBuilder.Length - 1, 1);
-            stringBuilder.Append(" WHERE BookId = ? AND SiteId = ?");
-
-            return stringBuilder.ToString();
-        }
-
-        protected void FillUpdateColumnsStatement(ISQLiteStatement statement, Tuple<long, long> key, Dictionary<string, object> columnKeyValue)
-        {
-            int i = 1;
-
-            foreach (var kv in columnKeyValue)
-            {
-                statement.Bind(i, kv.Value);
-                i++;
-            }
-
-            statement.Bind(i, key.Item1);
-            statement.Bind(i + 1, key.Item2);
-        }
+        
         #endregion
     }
 }

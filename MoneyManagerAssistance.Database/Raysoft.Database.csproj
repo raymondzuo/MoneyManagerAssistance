@@ -38,9 +38,16 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountBookTableDbLogicLayer.cs" />
+    <Compile Include="AccountCategoryTableDbLogicLayer.cs" />
+    <Compile Include="AccountSourceTableDbLogicLayer.cs" />
+    <Compile Include="AccountTableDbLogicLayer.cs" />
+    <Compile Include="AccountTypeTableDbLogicLayer.cs" />
     <Compile Include="DbHelper.cs" />
+    <Compile Include="MemberTableDbLogicLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseTableDbLogicLayer.cs" />
+    <Compile Include="SubAccountCategoryTableDbLogicLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MoneyManagerAssistance.Storage\Raysoft.Storage.csproj">
