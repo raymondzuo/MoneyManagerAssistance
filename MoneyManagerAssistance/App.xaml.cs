@@ -15,7 +15,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using MoneyManagerAssistance.ViewModel;
 using Raysoft.Database;
+using SQLitePCL;
 
 namespace MoneyManagerAssistance
 {
@@ -24,6 +26,7 @@ namespace MoneyManagerAssistance
     /// </summary>
     public sealed partial class App : Application
     {
+        public static ISQLiteConnection DbConnection { get; set; }
         private TransitionCollection transitions;
 
         /// <summary>
@@ -99,19 +102,10 @@ namespace MoneyManagerAssistance
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
 
-            await DbHelper.InitOrOpenDatabase();
-            await DbHelper.CreateAccountTable();
-            await DbHelper.CreateAccountBookTable();
-            await DbHelper.CreateAccountCategoryTable();
-            await DbHelper.CreateAccountSourceTable();
-            await DbHelper.CreateMemberTable();
-            await DbHelper.CreateSubAccountCategoryTable();
-
-            await DbHelper.InitMemberData();
-            await DbHelper.InitAccountBook();
-            await DbHelper.IniAccoutSourceData();
-            await DbHelper.InitAccountCategoryData();
-            await DbHelper.InitSubAccountCategoryData();
+            DbConnection = await DbHelper.InitOrOpenDatabase();
+            AppViewModel.Instance.CreateDatabaseTable();
+            AppViewModel.Instance.SetSqlConnection(DbConnection);
+            AppViewModel.Instance.InitDbData(DbConnection);
         }
 
         /// <summary>

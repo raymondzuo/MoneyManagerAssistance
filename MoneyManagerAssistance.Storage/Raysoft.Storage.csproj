@@ -35,6 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\Raysoft.Utility\Raysoft.Utility.csproj">
+      <Project>{31ae5e4c-3bc5-47c5-9033-a744d767c3a0}</Project>
+      <Name>Raysoft.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />

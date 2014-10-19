@@ -144,14 +144,14 @@ namespace MoneyManagerAssistance.Views
 
         private async void SaveAppBarButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var accountRec = new Accout()
+            var accountRec = new Account()
             {
-                AccountDate = ((DateTime)DP1.Value).Date.ToString("yyyy-MM-dd HH:mm:ss"),
+                AccountDate = ((DateTime)DP1.Value).Date,
                 MemberId = 1,
                 AccountType = 1,
                 SubCategoryId = 1,
                 AccountSum = int.Parse(this.AccountSumTextBox.Text),
-                AccountSourceType = 1,
+                AccountSourceId = 1,
                 Description = this.AccountDesTextBox.Text,
                 ABookId = 1,
             };

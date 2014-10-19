@@ -70,6 +70,7 @@ namespace Raysoft.Database
         protected override string GetDeleteItemSql()
         {
             return @"DELETE FROM SubAccountCategory WHERE Id = ?";
+                                 
         }
 
         protected override void FillDeleteItemStatement(ISQLiteStatement statement, long key)
@@ -79,7 +80,7 @@ namespace Raysoft.Database
 
         protected override string GetInsertItemSql()
         {
-            return @"INSERT INTO SubAccountCategory  
+            return @"INSERT INTO SubAccountCategory
                     (Name, CategoryId) 
                      VALUES (@name, @categoryId)";
         }
@@ -87,7 +88,7 @@ namespace Raysoft.Database
         protected override void FillInsertStatement(ISQLiteStatement statement, SubAccountCategory item)
         {
             statement.Bind("@name",item.Name);
-            statement.Bind("@categoryType", item.CategoryId);
+            statement.Bind("@categoryId", item.CategoryId);
         }
 
         protected override string GetUpdateItemSql()

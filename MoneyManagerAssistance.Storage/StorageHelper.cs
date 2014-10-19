@@ -14,8 +14,10 @@ namespace Raysoft.Storage
         #region 字段
 
         private static readonly object SyncObject = new object();
-        private static string _container = "Container";
-        private static ApplicationDataContainer localSettings;
+        private static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+        private static ApplicationDataContainer container;
+        private static string _containerName = "_GlobalContainer";
+        
 
         /// <summary>
         /// 本地文件夹根目录
@@ -28,6 +30,18 @@ namespace Raysoft.Storage
         private static readonly StorageFolder sdCardFolder = KnownFolders.RemovableDevices;
 
         #endregion
+
+        static StorageHelper()
+        {
+            if (!localSettings.Containers.ContainsKey(_containerName))
+            {
+                container = localSettings.CreateContainer(_containerName, ApplicationDataCreateDisposition.Always);
+            }
+            else
+            {
+                container = localSettings.Containers[_containerName];
+            }
+        }
 
         #region 文件夹相关
 
@@ -653,17 +667,15 @@ namespace Raysoft.Storage
         {
             lock (SyncObject)
             {
-                if (localSettings == null)
-                    localSettings = ApplicationData.Current.LocalSettings.CreateContainer(_container, ApplicationDataCreateDisposition.Always);
-
-                if (!localSettings.Containers.ContainsKey(_container))
+                if (!localSettings.Containers.ContainsKey(_containerName))
                 {
-                    var container = localSettings.CreateContainer(_container,
+                    container = localSettings.CreateContainer(_containerName,
                        ApplicationDataCreateDisposition.Always);
                 }
-                var values = localSettings.Containers[_container].Values;
+                var content = Utility.Utility.JsonSerialize(value);
+                var values = localSettings.Containers[_containerName].Values;
                 if (values.ContainsKey(key))
-                    values[key] = value;
+                    values[key] = content;
                 else
                 {
                     try
@@ -682,13 +694,44 @@ namespace Raysoft.Storage
         {
             lock (SyncObject)
             {
-                if (localSettings == null)
-                    localSettings = Windows.Storage.ApplicationData.Current.LocalSettings.CreateContainer(_container,
-                        ApplicationDataCreateDisposition.Always);
-                var values = localSettings.Containers[_container].Values;
-                if (values.ContainsKey(key))
-                    return values[key];
+                if (!localSettings.Containers.ContainsKey(_containerName))
+                {
+                    container = localSettings.CreateContainer(_containerName,
+                       ApplicationDataCreateDisposition.Always);
+                }
+
+                if (localSettings.Containers.ContainsKey(_containerName))
+                {
+                    var values = localSettings.Containers[_containerName].Values;
+                    if (values.ContainsKey(key))
+                        return values[key];
+                }
+                
                 return null;
+            }
+        }
+
+        public static T GetIsolatedObjectValue<T>(string key) where T : class
+        {
+            lock (SyncObject)
+            {
+                object obj = default(T);
+
+                try
+                {
+                    if (container.Values.ContainsKey(key))
+                        container.Values.TryGetValue(key, out obj);
+
+                    if (obj == null)
+                        return default(T);
+
+                    return Utility.Utility.JsonDeserialize<T>(obj.ToString());
+                }
+                catch (Exception ex)
+                {
+                }
+
+                return default(T);
             }
         }
 

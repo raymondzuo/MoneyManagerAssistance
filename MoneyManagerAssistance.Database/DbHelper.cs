@@ -37,14 +37,14 @@ namespace Raysoft.Database
         /// 创建财务相关来源（比如支付宝/现金）的sql
         /// </summary>
         private const string sqlOfCreateAccoutSourceTable = @"CREATE TABLE IF NOT EXISTS
-                                                              AccoutSource(    Id    INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                                              AccountSource(    Id    INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                                                                                Name    VARCHAR( 140 ),
                                                                                Description VARCHAR( 200 ) );";
         /// <summary>
         /// 创建账户类型表的sql，比如（收入，支出，借贷等）
         /// </summary>
         private const string sqlOfCreateAccoutTypeTable = @"CREATE TABLE IF NOT EXISTS
-                                                            AccoutType(Id    INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                                            AccountType(Id    INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                                                                        Name    VARCHAR( 140 ),
                                                                        Description VARCHAR( 200 ) );";
 
@@ -78,6 +78,7 @@ namespace Raysoft.Database
                                                                   MemberId   INTEGER NOT NULL,
                                                                   ABookId    INTEGER NOT NULL,
                                                                   AccountSourceId    INTEGER NOT NULL,
+                                                                  FOREIGN KEY(AccountType) REFERENCES AccoutType(Id) ON DELETE CASCADE,
                                                                   FOREIGN KEY(MemberId) REFERENCES Member(Id) ON DELETE CASCADE,
                                                                   FOREIGN KEY(SubCategoryId) REFERENCES SubAccountCategory(Id) ON DELETE CASCADE,
                                                                   FOREIGN KEY(AccountSourceId) REFERENCES AccoutSource(Id) ON DELETE CASCADE,
@@ -88,54 +89,86 @@ namespace Raysoft.Database
         private static SQLiteConnection conn;
 
         #region 创建数据表
-        public static async Task InitOrOpenDatabase()
+        public static async Task<ISQLiteConnection> InitOrOpenDatabase()
         {
-            var dbFolder = await StorageHelper.CreateLocalFolder("DataFolder");
+            var dbFolder = await StorageHelper.CreateAndGetTheFolder("DataFolder");
             conn = new SQLiteConnection("DataFolder/MyAccount.db");
+
+            return conn;
         }
 
 
-        public static async Task CreateAccountBookTable()
+        public static bool CreateAccountBookTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateAccountBookTable))
             {
-                statement.Step();
+                var result = statement.Step();
+                if (result.ToString().ToLower().Equals("done"))
+                {
+                    return true;
+                }
             }
+
+            return false;
         }
 
-        public static async Task CreateAccountSourceTable()
+        public static bool CreateAccountSourceTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateAccoutSourceTable))
             {
-                statement.Step();
+                var result = statement.Step();
+                if (result.ToString().ToLower().Equals("done"))
+                {
+                    return true;
+                }
             }
+
+            return false;
         }
 
-        public static async Task CreateAccountTypeTable()
+        public static bool CreateAccountTypeTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateAccoutTypeTable))
             {
-                statement.Step();
+                var result = statement.Step();
+                if (result.ToString().ToLower().Equals("done"))
+                {
+                    return true;
+                }
             }
+
+            return false;
         }
 
-        public static async Task CreateMemberTable()
+        public static bool CreateMemberTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateMemberTable))
             {
-                statement.Step();
+                var result = statement.Step();
+                if (result.ToString().ToLower().Equals("done"))
+                {
+                    return true;
+                }
             }
+
+            return false;
         }
 
-        public static async Task CreateAccountCategoryTable()
+        public static bool CreateAccountCategoryTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateAccountCategoryTable))
             {
-                statement.Step();
+                var result = statement.Step();
+                if (result.ToString().ToLower().Equals("done"))
+                {
+                    return true;
+                }
             }
+
+            return false;
         }
 
-        public static async Task CreateSubAccountCategoryTable()
+        public static bool  CreateSubAccountCategoryTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateSubAccountCategoryTable))
             {
@@ -145,11 +178,17 @@ namespace Raysoft.Database
             var sql = @"PRAGMA foreign_keys = ON";
             using (var statement = conn.Prepare(sql))
             {
-                statement.Step();
+                var result = statement.Step();
+                if (result.ToString().ToLower().Equals("done"))
+                {
+                    return true;
+                }
             }
+
+            return false;
         }
 
-        public static async Task CreateAccountTable()
+        public static bool CreateAccountTable()
         {
             using (var statement = conn.Prepare(sqlOfCreateAccountTable))
             {
@@ -159,8 +198,14 @@ namespace Raysoft.Database
             var sql = @"PRAGMA foreign_keys = ON";
             using (var statement = conn.Prepare(sql))
             {
-                statement.Step();
+                var result = statement.Step();
+                if (result.ToString().ToLower().Equals("done"))
+                {
+                    return true;
+                }
             }
+
+            return false;
         }
 
         #endregion

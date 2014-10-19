@@ -8,7 +8,7 @@ using SQLitePCL;
 
 namespace Raysoft.Database
 {
-    class AccountCategoryTableDbLogicLayer:BaseTableDbLogicLayer<AccountCategory,long>
+    public class AccountCategoryTableDbLogicLayer:BaseTableDbLogicLayer<AccountCategory,long>
     {
         #region 单例
 

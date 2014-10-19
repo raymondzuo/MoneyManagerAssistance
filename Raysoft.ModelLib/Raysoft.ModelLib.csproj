@@ -46,6 +46,7 @@
     <Compile Include="AccountType.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="AccountSource.cs" />
+    <Compile Include="AppSettings.cs" />
     <Compile Include="Member.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

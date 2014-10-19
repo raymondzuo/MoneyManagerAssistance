@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using SQLitePCL;
 
 namespace Raysoft.Database
@@ -160,14 +161,49 @@ namespace Raysoft.Database
         /// 插入一条新条目
         /// </summary>
         /// <param name="item"></param>
-        public void InsertItem(TItemType item)
+        public bool InsertItem(TItemType item)
         {
+            string result = string.Empty;
+
             using (var statement = sqlConnection.Prepare(GetInsertItemSql()))
             {
                 FillInsertStatement(statement, item);
-                statement.Step();
+                result = statement.Step().ToString();
             }
             Timestamp = DateTime.Now;
+
+            if (result.ToLower().Equals("done"))
+                return true;
+            
+            return false;
+        }
+
+        public async Task<bool> InsertItemAsync(TItemType item)
+        {
+            string result = string.Empty;
+            try
+            {
+                await Task.Run(() =>
+                {
+                    using (var statement = sqlConnection.Prepare(GetInsertItemSql()))
+                    {
+                        FillInsertStatement(statement, item);
+                        result = statement.Step().ToString();
+                        if (result.ToLower().Equals("done"))
+                        {
+                            Timestamp = DateTime.Now;
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return false;
         }
 
         /// <summary>

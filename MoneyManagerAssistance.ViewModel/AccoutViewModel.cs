@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Raysoft.ModelLib;
 using Raysoft.Phone.Common;
 using SQLitePCL;
+using Raysoft.ModelLib;
 
 namespace MoneyManagerAssistance.ViewModel
 {
@@ -27,7 +28,7 @@ namespace MoneyManagerAssistance.ViewModel
         /// 保存一条新的账目记录
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> SaveAccountRecord(Accout accoutRecord)
+        public async Task<bool> SaveAccountRecord(Account accoutRecord)
         {
             //var result = await DbHelper.InsertAccount(accoutRecord);
             return true;

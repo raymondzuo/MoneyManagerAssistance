@@ -6,6 +6,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
+using Newtonsoft.Json;
 
 namespace Raysoft.Utility
 {
@@ -49,6 +50,32 @@ namespace Raysoft.Utility
             }
 
             return Colors.Black;
+        }
+
+        public static string JsonSerialize(object value)
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(value);
+            }
+            catch (Exception)
+            {
+                return String.Empty;
+            }
+        }
+
+        public static T JsonDeserialize<T>(string data)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(data);
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return default(T);
         }
     }
 }
