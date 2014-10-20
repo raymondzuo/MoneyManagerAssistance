@@ -65,31 +65,31 @@
                 <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="1" Grid.ColumnSpan="3"></StackPanel>
 
                 <TextBlock Text="选择成员"  Grid.Row="2" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
-                <ComboBox x:Name="MemberComboBox" SelectedIndex="0" Grid.Row="2" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
-                          BorderThickness="1" Width="300" HorizontalAlignment="Left" Margin="15 0 0 0">
-                    <ComboBox.Items>
-                        <TextBlock Text="本人" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                        <TextBlock Text="老爸" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                        <TextBlock Text="老妈" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                        <TextBlock Text="老婆" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                    </ComboBox.Items>
+                <ComboBox x:Name="MemberComboBox"  Grid.Row="2" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
+                          BorderThickness="1" Width="300" HorizontalAlignment="Left" Margin="15 0 0 0" ItemsSource="{Binding Members}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>    
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
 
                 <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="3" Grid.ColumnSpan="3"></StackPanel>
 
                 <TextBlock Text="账目类别"  Grid.Row="4" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
-                <ComboBox x:Name="AcntCategoryComboBox" SelectedIndex="0" Grid.Row="4" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
+                <ComboBox x:Name="AcntTypeComboBox" ItemsSource="{Binding AccountTypes}" Grid.Row="4" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
                           BorderThickness="1" Width="300" HorizontalAlignment="Left" Margin="15 0 0 0">
-                    <ComboBox.Items>
-                        <TextBlock Text="收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                        <TextBlock Text="支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                    </ComboBox.Items>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
 
                 <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="5" Grid.ColumnSpan="3"></StackPanel>
 
                 <TextBlock Text="项目"  Grid.Row="6" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
-                <TextBox x:Name="AccoutTypeInput" Width="300" Grid.Row="6" Grid.Column="1"  Text="交通消费" IsReadOnly="True"
+                <TextBox x:Name="AccoutCategoryInput" Width="300" Grid.Row="6" Grid.Column="1"  Text="点击选择项目" IsReadOnly="True"
                          Foreground="{StaticResource AppForegroundColorBrush}" FontSize="20" Margin="15 5 0 5" HorizontalAlignment="Left">
                     
                 </TextBox>
@@ -110,13 +110,13 @@
                 <StackPanel Style="{StaticResource SpStyle}"  Grid.Row="9" Grid.ColumnSpan="3"></StackPanel>
 
                 <TextBlock Text="选择账户"  Grid.Row="10" Grid.Column="0" Style="{StaticResource TbStyle}"></TextBlock>
-                <ComboBox x:Name="AccountSrcComboBox" SelectedIndex="0" Grid.Row="10" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
+                <ComboBox x:Name="AccountSrcComboBox" ItemsSource="{Binding AccoutSources}" Grid.Row="10" Grid.Column="1" BorderBrush="{StaticResource AppForegroundColorBrush}" 
                           BorderThickness="1" Width="300" HorizontalAlignment="Left" Margin="15 0 0 0">
-                    <ComboBox.Items>
-                        <TextBlock Text="现金" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                        <TextBlock Text="支付宝" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                        <TextBlock Text="银行卡" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                    </ComboBox.Items>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
 
                 <StackPanel Style="{StaticResource SpStyle}" Grid.Row="11" Grid.ColumnSpan="3"></StackPanel>

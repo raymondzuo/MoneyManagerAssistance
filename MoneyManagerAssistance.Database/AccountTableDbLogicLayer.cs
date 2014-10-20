@@ -92,7 +92,7 @@ namespace Raysoft.Database
 
         protected override void FillInsertStatement(ISQLiteStatement statement, Account item)
         {
-            statement.Bind("@accountDate", item.AccountDate);
+            statement.Bind("@accountDate", item.AccountDate.ToString("yyyy-MM-dd HH:mm:ss"));
             statement.Bind("@accountSum", item.AccountSum);
             statement.Bind("@description", item.Description);
             statement.Bind("@accountType", item.AccountType);

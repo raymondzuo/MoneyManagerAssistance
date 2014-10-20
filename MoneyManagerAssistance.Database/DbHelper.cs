@@ -78,10 +78,10 @@ namespace Raysoft.Database
                                                                   MemberId   INTEGER NOT NULL,
                                                                   ABookId    INTEGER NOT NULL,
                                                                   AccountSourceId    INTEGER NOT NULL,
-                                                                  FOREIGN KEY(AccountType) REFERENCES AccoutType(Id) ON DELETE CASCADE,
+                                                                  FOREIGN KEY(AccountType) REFERENCES AccountType(Id) ON DELETE CASCADE,
                                                                   FOREIGN KEY(MemberId) REFERENCES Member(Id) ON DELETE CASCADE,
                                                                   FOREIGN KEY(SubCategoryId) REFERENCES SubAccountCategory(Id) ON DELETE CASCADE,
-                                                                  FOREIGN KEY(AccountSourceId) REFERENCES AccoutSource(Id) ON DELETE CASCADE,
+                                                                  FOREIGN KEY(AccountSourceId) REFERENCES AccountSource(Id) ON DELETE CASCADE,
                                                                   FOREIGN KEY(ABookId) REFERENCES AccountBook(Id) ON DELETE CASCADE );";
 
         #endregion
@@ -275,7 +275,7 @@ namespace Raysoft.Database
             {
                 await Task.Run(() =>
                 {
-                    using (var accoutSource = conn.Prepare("INSERT INTO AccoutSource (Name, Description) VALUES (?, ?)"))
+                    using (var accoutSource = conn.Prepare("INSERT INTO AccountSource (Name, Description) VALUES (?, ?)"))
                     {
                         accoutSource.Bind(1, "现金");
                         accoutSource.Bind(2, "已有现金");

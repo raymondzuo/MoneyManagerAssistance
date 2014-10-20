@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Navigation;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkID=390556 上有介绍
 using MoneyManagerAssistance.SubViews;
+using MoneyManagerAssistance.ViewModel;
 using Raysoft.ModelLib;
 using Raysoft.Phone.Common;
 
@@ -29,14 +30,26 @@ namespace MoneyManagerAssistance.Views
     /// </summary>
     public sealed partial class AccountPage : BasePage
     {
-        private AccountTypeSelector selector;
+        private AccountCategorySelector selector;
+        private AccountViewModel vm;
         
         
         public AccountPage()
         {
             this.InitializeComponent();
-            this.AccoutTypeInput.AddHandler(TappedEvent, new TappedEventHandler(AccoutTypeInput_OnTapped), true);
+            vm = new AccountViewModel();
+            this.DataContext = vm;
             
+            this.AccoutCategoryInput.AddHandler(TappedEvent, new TappedEventHandler(AccoutTypeInput_OnTapped), true);
+            this.Loaded += OnLoaded;
+            
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            this.MemberComboBox.SelectedIndex = 0;
+            this.AcntTypeComboBox.SelectedIndex = 0;
+            this.AccountSrcComboBox.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -82,14 +95,21 @@ namespace MoneyManagerAssistance.Views
                 To = Window.Current.Bounds.Width - 210
             };
 
-            selector = new AccountTypeSelector();
-            selector.RenderTransform = new CompositeTransform();
-            selector.SelectTappedEvent += (sender, args) =>
+            if (selector == null)
             {
-                var item = args;
-                this.AccoutTypeInput.Text = args;
-            };
-            
+                selector = new AccountCategorySelector();
+                selector.BigAccountTypeIndex = this.AcntTypeComboBox.SelectedIndex + 1;
+                selector.RenderTransform = new CompositeTransform();
+                selector.SelectTappedEvent += (sender, args) =>
+                {
+                    this.AccoutCategoryInput.Text = args.Name;
+                    this.AccoutCategoryInput.Tag = args.Id;
+                };
+            }
+            else
+            {
+                selector.BigAccountTypeIndex = this.AcntTypeComboBox.SelectedIndex + 1;
+            }
 
             Storyboard.SetTarget(animation,selector);
             Storyboard.SetTargetProperty(animation, "(UIElement.RenderTransform).(CompositeTransform.TranslateX)");
@@ -142,21 +162,21 @@ namespace MoneyManagerAssistance.Views
             }
         }
 
-        private async void SaveAppBarButton_OnClick(object sender, RoutedEventArgs e)
+        private void SaveAppBarButton_OnClick(object sender, RoutedEventArgs e)
         {
             var accountRec = new Account()
             {
-                AccountDate = ((DateTime)DP1.Value).Date,
-                MemberId = 1,
-                AccountType = 1,
-                SubCategoryId = 1,
-                AccountSum = int.Parse(this.AccountSumTextBox.Text),
-                AccountSourceId = 1,
+                AccountDate = (DateTime)DP1.Value,
+                MemberId = this.MemberComboBox.SelectedIndex + 1,
+                AccountType = this.AcntTypeComboBox.SelectedIndex + 1,
+                SubCategoryId = int.Parse(this.AccoutCategoryInput.Tag.ToString()),
+                AccountSum = float.Parse(this.AccountSumTextBox.Text),
+                AccountSourceId = this.AccountSrcComboBox.SelectedIndex + 1,
                 Description = this.AccountDesTextBox.Text,
                 ABookId = 1,
             };
 
-            //await viewModel.SaveAccountRecord(accountRec);
+            var result = vm.SaveAccountRecord(accountRec);
         }
 
 

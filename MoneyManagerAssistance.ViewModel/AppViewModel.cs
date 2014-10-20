@@ -40,7 +40,13 @@ namespace MoneyManagerAssistance.ViewModel
         private ISQLiteConnection conn;
         public void SetSqlConnection(ISQLiteConnection conn)
         {
-            this.conn = conn;
+            AccountTableDbLogicLayer.Instance.SetSqlConnection(conn);
+            AccountTypeTableDbLogicLayer.Instance.SetSqlConnection(conn);
+            MemberTableDbLogicLayer.Instance.SetSqlConnection(conn);
+            AccountBookTableDbLogicLayer.Instance.SetSqlConnection(conn);
+            AccountSourceTableDbLogicLayer.Instance.SetSqlConnection(conn);
+            AccountCategoryTableDbLogicLayer.Instance.SetSqlConnection(conn);
+            SubAccountCategoryTableDbLogicLayer.Instance.SetSqlConnection(conn);
         }
 
         #endregion
@@ -184,8 +190,6 @@ namespace MoneyManagerAssistance.ViewModel
                 new AccountType(){Name = "收入",Description = ""},
             };
 
-            AccountTypeTableDbLogicLayer.Instance.SetSqlConnection(conn);
-
             foreach (var accountType in dataList)
             {
                 isAllSuccess = isAllSuccess && AccountTypeTableDbLogicLayer.Instance.InsertItem(accountType);
@@ -207,8 +211,6 @@ namespace MoneyManagerAssistance.ViewModel
                 new Member(){Name = "子女",Description = ""},
             };
 
-            MemberTableDbLogicLayer.Instance.SetSqlConnection(conn);
-
             foreach (var member in dataList)
             {
                 isAllSuccess = isAllSuccess && MemberTableDbLogicLayer.Instance.InsertItem(member);
@@ -225,8 +227,6 @@ namespace MoneyManagerAssistance.ViewModel
             {
                 new AccountBook(){Name = "默认账本",Description = ""},
             };
-
-            AccountBookTableDbLogicLayer.Instance.SetSqlConnection(conn);
 
             foreach (var accountBook in dataList)
             {
@@ -245,10 +245,8 @@ namespace MoneyManagerAssistance.ViewModel
                 new AccountSource(){Name = "现金",Description = ""},
                 new AccountSource(){Name = "信用卡",Description = ""},
                 new AccountSource(){Name = "银行卡（借记卡）",Description = ""},
-                new AccountSource(){Name = "虚拟账户（支付宝，金融，证券等）",Description = ""},
+                new AccountSource(){Name = "虚拟账户（支付宝等）",Description = ""},
             };
-
-            AccountSourceTableDbLogicLayer.Instance.SetSqlConnection(conn);
 
             foreach (var accountSource in dataList)
             {
@@ -264,22 +262,20 @@ namespace MoneyManagerAssistance.ViewModel
 
             var dataList = new List<AccountCategory>()
             {
-                new AccountCategory(){Name = "食品酒水类",CategoryType = 0},
-                new AccountCategory(){Name = "服饰类",CategoryType = 0},
-                new AccountCategory(){Name = "交通类",CategoryType = 0},
-                new AccountCategory(){Name = "通信类",CategoryType = 0},
-                new AccountCategory(){Name = "居家物业类",CategoryType = 0},
-                new AccountCategory(){Name = "医疗保健类",CategoryType = 0},
-                new AccountCategory(){Name = "娱乐休闲类",CategoryType = 0},
-                new AccountCategory(){Name = "学习培训类",CategoryType = 0},
-                new AccountCategory(){Name = "人情往来类",CategoryType = 0},
-                new AccountCategory(){Name = "杂项",CategoryType = 0},
+                new AccountCategory(){Name = "食品酒水类",CategoryType = 1},
+                new AccountCategory(){Name = "服饰类",CategoryType = 1},
+                new AccountCategory(){Name = "交通类",CategoryType = 1},
+                new AccountCategory(){Name = "通信类",CategoryType = 1},
+                new AccountCategory(){Name = "居家物业类",CategoryType = 1},
+                new AccountCategory(){Name = "医疗保健类",CategoryType = 1},
+                new AccountCategory(){Name = "娱乐休闲类",CategoryType = 1},
+                new AccountCategory(){Name = "学习培训类",CategoryType = 1},
+                new AccountCategory(){Name = "人情往来类",CategoryType = 1},
+                new AccountCategory(){Name = "杂项",CategoryType = 1},
 
-                new AccountCategory(){Name = "工薪收入类",CategoryType = 1},
-                new AccountCategory(){Name = "其他收入",CategoryType = 1},
+                new AccountCategory(){Name = "工薪收入类",CategoryType = 2},
+                new AccountCategory(){Name = "其他收入",CategoryType = 2},
             };
-
-            AccountCategoryTableDbLogicLayer.Instance.SetSqlConnection(conn);
 
             foreach (var accountSource in dataList)
             {
@@ -353,8 +349,6 @@ namespace MoneyManagerAssistance.ViewModel
                 new SubAccountCategory(){Name = "中奖收入",CategoryId = 12},
                 new SubAccountCategory(){Name = "意外收入",CategoryId = 12},
             };
-
-            SubAccountCategoryTableDbLogicLayer.Instance.SetSqlConnection(conn);
 
             foreach (var subAccountCategory in dataList)
             {

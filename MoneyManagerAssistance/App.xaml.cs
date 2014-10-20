@@ -103,8 +103,8 @@ namespace MoneyManagerAssistance
             Window.Current.Activate();
 
             DbConnection = await DbHelper.InitOrOpenDatabase();
-            AppViewModel.Instance.CreateDatabaseTable();
             AppViewModel.Instance.SetSqlConnection(DbConnection);
+            AppViewModel.Instance.CreateDatabaseTable();
             AppViewModel.Instance.InitDbData(DbConnection);
         }
 

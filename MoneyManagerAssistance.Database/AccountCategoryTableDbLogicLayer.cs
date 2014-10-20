@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,14 +48,14 @@ namespace Raysoft.Database
 
         protected override AccountCategory CreateItem(ISQLiteStatement statement)
         {
-            var accoutBook = new AccountCategory()
+            var accountCategory = new AccountCategory()
             {
                 Id = int.Parse(statement[0].ToString()),
                 Name = statement[1].ToString(),
                 CategoryType = int.Parse(statement[2].ToString()),
             };
 
-            return accoutBook;
+            return accountCategory;
         }
 
         protected override string GetSelectItemSql()
@@ -127,6 +128,34 @@ namespace Raysoft.Database
             }
 
             statement.Bind(i, key);
+        }
+
+        protected string GetSelectItemSqlByCategoryType()
+        {
+            return @"SELECT * FROM AccountCategory WHERE CategoryType = ?";
+        }
+
+        protected void FillSelectItemStatementByCategoryType(ISQLiteStatement statement, int key)
+        {
+            statement.Bind(1, key);
+        }
+
+        public ObservableCollection<AccountCategory> GetAccountTypesByCategoryType(int categoryType)
+        {
+            var items = new ObservableCollection<AccountCategory>();
+
+            using (var statement = sqlConnection.Prepare(GetSelectItemSqlByCategoryType()))
+            {
+                FillSelectItemStatementByCategoryType(statement, categoryType);
+
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    var item = CreateItem(statement);
+                    items.Add(item);
+                }
+            }
+
+            return items;
         }
 
         #endregion

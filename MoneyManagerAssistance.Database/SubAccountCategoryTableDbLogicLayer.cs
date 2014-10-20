@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -128,6 +129,34 @@ namespace Raysoft.Database
             }
 
             statement.Bind(i, key);
+        }
+
+        protected string GetSelectItemSqlByCategoryId()
+        {
+            return @"SELECT * FROM SubAccountCategory WHERE CategoryId = ?";
+        }
+
+        protected void FillSelectItemStatementByCategoryId(ISQLiteStatement statement, int key)
+        {
+            statement.Bind(1, key);
+        }
+
+        public ObservableCollection<SubAccountCategory> GetSubAccountTypesByCategoryType(int categoryId)
+        {
+            var items = new ObservableCollection<SubAccountCategory>();
+
+            using (var statement = sqlConnection.Prepare(GetSelectItemSqlByCategoryId()))
+            {
+                FillSelectItemStatementByCategoryId(statement, categoryId);
+
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    var item = CreateItem(statement);
+                    items.Add(item);
+                }
+            }
+
+            return items;
         }
 
         #endregion

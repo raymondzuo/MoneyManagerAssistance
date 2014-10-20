@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AccountBook.cs" />
     <Compile Include="AccountCategory.cs" />
+    <Compile Include="AccountCategoryForBinding.cs" />
     <Compile Include="AccountType.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="AccountSource.cs" />

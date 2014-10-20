@@ -106,7 +106,7 @@ namespace Raysoft.Database
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private ISQLiteConnection sqlConnection { set; get; }
+        protected ISQLiteConnection sqlConnection { set; get; }
         public void SetSqlConnection(ISQLiteConnection conn)
         {
             this.sqlConnection = conn;

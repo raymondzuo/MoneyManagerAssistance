@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="MoneyManagerAssistance.SubViews.AccountTypeSelector"
+    x:Class="MoneyManagerAssistance.SubViews.AccountCategorySelector"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MoneyManagerAssistance.SubViews"
@@ -11,23 +11,23 @@
     <UserControl.Resources>
         <DataTemplate x:Key="ZoomedOutDataTemplate">
             <Grid Height="45" HorizontalAlignment="Stretch" Margin="20,0,20,15" Width="200">
-                <TextBlock Text="{Binding Path=Group.MainType}" FontSize="20" Foreground="{StaticResource AppBackgroundColorBrush}" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Text="{Binding Path=Group.AccountCategory.Name}" FontSize="20" Foreground="{StaticResource AppBackgroundColorBrush}" TextTrimming="CharacterEllipsis"></TextBlock>
             </Grid>
         </DataTemplate>
         
         <DataTemplate x:Key="ZoomedInDataTemplate">
             <Grid Margin="20 0 0 0">
-                <TextBlock Text="{Binding}" FontSize="18" Foreground="{StaticResource AppBackgroundColorBrush}"  TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Text="{Binding Name}" FontSize="18" Foreground="{StaticResource AppBackgroundColorBrush}"  TextTrimming="CharacterEllipsis"></TextBlock>
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="ZoomedInHeaderTemplate">
             <Grid Background="Transparent" Margin="20,0,0,15">
-                <TextBlock Text="{Binding MainType}" Width="300" HorizontalAlignment="Left" Foreground="{StaticResource AppBackgroundColorBrush}" TextTrimming="WordEllipsis" FontSize="24"></TextBlock>
+                <TextBlock Text="{Binding AccountCategory.Name}" Width="300" HorizontalAlignment="Left" Foreground="{StaticResource AppBackgroundColorBrush}" TextTrimming="WordEllipsis" FontSize="24"></TextBlock>
             </Grid>
         </DataTemplate>
 
-        <CollectionViewSource x:Name="ViewSource" IsSourceGrouped="True" ItemsPath="SubType"></CollectionViewSource>
+        <CollectionViewSource x:Name="ViewSource" IsSourceGrouped="True" Source="{Binding AccountCategoryForBindings}" ItemsPath="SubAccountCategorys"></CollectionViewSource>
 
         <Style x:Key="SemanticZoomStyle1" TargetType="SemanticZoom">
             <Setter Property="Padding" Value="0"/>

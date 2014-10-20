@@ -21,5 +21,15 @@ namespace Raysoft.Phone.Common
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        protected bool SetValue<T>(ref T current, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (object.Equals(current, value))
+                return false;
+
+            current = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
 }
