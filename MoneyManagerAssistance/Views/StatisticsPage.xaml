@@ -35,7 +35,11 @@
                            Text="{Binding Converter={StaticResource labelconverter}}" />
             </Grid>
         </DataTemplate>
-
+        
+        <DataTemplate x:Key="ColumnLabelTemplate">
+            <TextBlock Text="{Binding LabelContent}" Foreground="{StaticResource AppForegroundColorBrush}" FontSize="14"/>
+        </DataTemplate>
+        
         <DataTemplate x:Key="pieTemplate">
             <Grid>
                 <Rectangle Stroke="White" Fill="{Binding Converter={StaticResource colorConv}}" StrokeThickness="1">
@@ -72,7 +76,7 @@
     </Page.Resources>
 
     <Grid>
-        <Pivot Title="收入统计图" HeaderTemplate="{StaticResource CommonPivotHeaderTemplate}" TitleTemplate="{StaticResource CommonPivotTitleTemplate}">
+        <Pivot x:Name="StatPivot" HeaderTemplate="{StaticResource CommonPivotHeaderTemplate}" TitleTemplate="{StaticResource CommonPivotTitleTemplate}">
             
             <PivotItem Header="饼状图" x:Name="PivotItem">
                 <charts:SfChart x:Name="DoughnutChart"  AreaBorderThickness="0" FontSize="20" HorizontalAlignment="Center" Margin="10">
@@ -81,8 +85,8 @@
                         <charts:ChartLegend   FontSize="12" DockPosition="Top"  BorderThickness="1" Foreground="{StaticResource AppForegroundColorBrush}">
                         </charts:ChartLegend>
                     </charts:SfChart.Legend>
-                    <charts:DoughnutSeries x:Name="DoughnutSeries" ItemsSource="{Binding CompanyDetails}" 
-                                                  XBindingPath="CompanyName" YBindingPath="CompanyTurnover"
+                    <charts:DoughnutSeries x:Name="DoughnutSeries" ItemsSource="{Binding AccountStatisticsForBindings}" 
+                                                  XBindingPath="StatisticItem" YBindingPath="AccountSum"
                                                ShowTooltip="True">
                         <charts:DoughnutSeries.AdornmentsInfo>
                             <charts:ChartAdornmentInfo AdornmentsPosition="Top"  HorizontalAlignment="Center" 
@@ -99,40 +103,39 @@
             </PivotItem>
             
             <PivotItem Header="柱状图" x:Name="PivotItem1">
-                <charts:SfChart x:Name="stColumnChart"  Margin="10"  DataContext="{Binding ColumnViewModel}" >
-                    <charts:SfChart.Behaviors>
-                        <charts:ChartZoomPanBehavior/>
-                    </charts:SfChart.Behaviors>
-                    <charts:SfChart.Legend>
-                        <charts:ChartLegend Margin="5" ItemMargin="5" DockPosition="Top" Foreground="{StaticResource AppForegroundColorBrush}"></charts:ChartLegend>
-                    </charts:SfChart.Legend>
-
-                    <charts:SfChart.AreaBorderBrush>#FF1D1D1D</charts:SfChart.AreaBorderBrush>
+                <charts:SfChart Margin="10" AreaBorderThickness="1" x:Name="columnChart" >
+                    <charts:SfChart.Header>
+                        <TextBlock FontSize="22" FontFamily="Segoe UI" Margin="10" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
+                    </charts:SfChart.Header>
                     <charts:SfChart.PrimaryAxis>
-                        <charts:CategoryAxis Header="收入" FontSize="16" Foreground="{StaticResource AppForegroundColorBrush}" MajorGridLineStyle="{StaticResource majorTickLineStyle}"></charts:CategoryAxis>
+                        <charts:CategoryAxis Header="分类" 
+                                     MajorGridLineStyle="{StaticResource majorTickLineStyle}"
+                    TickLineSize="10" 
+                    FontSize="18"
+                    Foreground="{StaticResource AppForegroundColorBrush}"
+                    LabelTemplate="{StaticResource ColumnLabelTemplate}">
+                        </charts:CategoryAxis>
                     </charts:SfChart.PrimaryAxis>
-
                     <charts:SfChart.SecondaryAxis>
-                        <charts:NumericalAxis RangePadding="Round"  FontSize="16"  Header="金额" Foreground="{StaticResource AppForegroundColorBrush}" MajorGridLineStyle="{StaticResource majorTickLineStyle}"></charts:NumericalAxis>
+                        <charts:NumericalAxis   FontSize="18" Foreground="{StaticResource AppForegroundColorBrush}"
+                                     Minimum="0" Header="金额" MajorGridLineStyle="{StaticResource majorTickLineStyle}"
+                    LabelTemplate="{StaticResource ColumnLabelTemplate}"/>
+
                     </charts:SfChart.SecondaryAxis>
-
-                    <charts:StackingColumnSeries EnableAnimation="True" LegendIcon="Rectangle" Interior="Gold" Label="Gold" XBindingPath="CountryName" YBindingPath="GoldMedals" ItemsSource="{Binding MedalDetails}">
-                        <charts:StackingColumnSeries.AdornmentsInfo>
-                            <charts:ChartAdornmentInfo ShowMarker="False" ShowLabel="True" HorizontalAlignment="Center" VerticalAlignment="Bottom" LabelTemplate="{StaticResource DataLabelTemplate}" />
-                        </charts:StackingColumnSeries.AdornmentsInfo>
-                    </charts:StackingColumnSeries>
-
-                    <charts:StackingColumnSeries EnableAnimation="True" LegendIcon="Rectangle"   Interior="Silver" Label="Silver" XBindingPath="CountryName" YBindingPath="SilverMedals" ItemsSource="{Binding MedalDetails}">
-                        <charts:StackingColumnSeries.AdornmentsInfo>
-                            <charts:ChartAdornmentInfo ShowMarker="False" ShowLabel="True" HorizontalAlignment="Center" VerticalAlignment="Bottom" LabelTemplate="{StaticResource DataLabelTemplate}" />
-                        </charts:StackingColumnSeries.AdornmentsInfo>
-                    </charts:StackingColumnSeries>
-
-                    <charts:StackingColumnSeries EnableAnimation="True" LegendIcon="Rectangle" Interior="SandyBrown" Label="Bronze" XBindingPath="CountryName" YBindingPath="BronzeMedals" ItemsSource="{Binding MedalDetails}">
-                        <charts:StackingColumnSeries.AdornmentsInfo>
-                            <charts:ChartAdornmentInfo ShowMarker="False" ShowLabel="True" HorizontalAlignment="Center" VerticalAlignment="Bottom" LabelTemplate="{StaticResource DataLabelTemplate}" />
-                        </charts:StackingColumnSeries.AdornmentsInfo>
-                    </charts:StackingColumnSeries>
+                    <charts:SfChart.AreaBorderBrush>#FF1D1D1D</charts:SfChart.AreaBorderBrush>
+                    <charts:ColumnSeries EnableAnimation="True" ShowTooltip="True" charts:ChartTooltip.EnableAnimation="True" Palette="Metro" ItemsSource="{Binding AccountStatisticsForBindings}"  XBindingPath="StatisticItem" YBindingPath="AccountSum" Label="First">
+                        <charts:ColumnSeries.AdornmentsInfo>
+                            <charts:ChartAdornmentInfo AdornmentsPosition="TopAndBottom" HorizontalAlignment="Center" VerticalAlignment="Center" ShowLabel="True" ShowMarker="True">
+                                <charts:ChartAdornmentInfo.LabelTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <TextBlock Text="{Binding}" FontFamily="Segoe UI"  FontSize="20"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </charts:ChartAdornmentInfo.LabelTemplate>
+                            </charts:ChartAdornmentInfo>
+                        </charts:ColumnSeries.AdornmentsInfo>
+                    </charts:ColumnSeries>
 
                 </charts:SfChart>
             </PivotItem>

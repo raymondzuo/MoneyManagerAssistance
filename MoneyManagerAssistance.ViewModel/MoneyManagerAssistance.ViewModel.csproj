@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountCateSelectViewModel.cs" />
+    <Compile Include="AccoutStatisticsViewModel.cs" />
     <Compile Include="AccoutViewModel.cs" />
     <Compile Include="AppViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

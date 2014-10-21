@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -139,6 +140,47 @@ namespace Raysoft.Database
             }
 
             statement.Bind(i, key);
+        }
+
+        protected string GetSelectItemSqlByCondition(string condition)
+        {
+            switch (condition)
+            {
+                case "SubCategoryId":
+                    return @"SELECT SubAccountCategory.Name, SUM(Account.AccountSum)
+                             FROM Account,SubAccountCategory
+                             WHERE Account.AccountType = ? AND Account.SubCategoryId = SubAccountCategory.Id
+                             GROUP BY SubAccountCategory.Id";
+                    break;
+            }
+            return @"SELECT * FROM SubAccountCategory WHERE CategoryId = ?";
+        }
+
+        protected void FillSelectItemStatementByCategoryId(ISQLiteStatement statement, int accountType)
+        {
+            statement.Bind(1, accountType);
+        }
+
+        public ObservableCollection<AccountStatisticsForBinding> GetAccountStatResultByCondition(string condition, int value,int accountType)
+        {
+            var items = new ObservableCollection<AccountStatisticsForBinding>();
+
+            using (var statement = sqlConnection.Prepare(GetSelectItemSqlByCondition(condition)))
+            {
+                FillSelectItemStatementByCategoryId(statement, accountType);
+
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    var item = new AccountStatisticsForBinding()
+                    {
+                        StatisticItem = statement[0].ToString(),
+                        AccountSum = float.Parse(statement[1].ToString()),
+                    };
+                    items.Add(item);
+                }
+            }
+
+            return items;
         }
 
         #endregion

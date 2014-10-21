@@ -18,7 +18,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkID=390556 上有介绍
+using MoneyManagerAssistance.ViewModel;
+using Raysoft.ModelLib;
 using Raysoft.Phone.Common;
+using Raysoft.Utility;
 using Syncfusion.UI.Xaml.Charts;
 
 namespace MoneyManagerAssistance.Views
@@ -31,11 +34,16 @@ namespace MoneyManagerAssistance.Views
         
         PieChartViewModel viewModel;
         public StackingColumnChartViewModel ColumnViewModel { get; set; }
+        private AccoutStatisticsViewModel vm;
+        private AppBarButton addNewAccountings;
 
         public StatisticsPage()
         {
             this.InitializeComponent();
-            
+            vm = new AccoutStatisticsViewModel();
+            this.PivotItem.DataContext = vm;
+            this.PivotItem1.DataContext = vm;
+            InitAppBar();
         }
 
         /// <summary>
@@ -46,14 +54,49 @@ namespace MoneyManagerAssistance.Views
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
-            viewModel = new PieChartViewModel();
-            this.PivotItem.DataContext = viewModel;
-            ColumnViewModel = new StackingColumnChartViewModel();
-            this.PivotItem1.DataContext = this;
+            this.StatPivot.SelectedIndex = 0;
+            var param = int.Parse(e.Parameter.ToString());
+            if (param == 1)
+            {
+                this.StatPivot.Title = "支出统计图";
+            }
+            else if (param == 2)
+            {
+                this.StatPivot.Title = "收入统计图";
+            }
+            vm.SetStatisticsResult("SubCategoryId", 0, param);
+            //viewModel = new PieChartViewModel();
+            //this.PivotItem.DataContext = viewModel;
+            //ColumnViewModel = new StackingColumnChartViewModel();
+            //this.PivotItem1.DataContext = this;
         }
 
+        private void InitAppBar()
+        {
+            var appBar = new CommandBar();
 
+            addNewAccountings = new AppBarButton() { Label = "查看大类" };
+            addNewAccountings.Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBarIcon/Add-New.png", UriKind.RelativeOrAbsolute) };
+            addNewAccountings.Click += (sender, args) =>
+            {
+                
+
+            };
+
+            appBar.PrimaryCommands.Add(addNewAccountings);
+            this.BottomAppBar = appBar;
+            SetAppBarBackgroundColor();
+        }
+
+        public void SetAppBarBackgroundColor(double Opacity = 0.88)
+        {
+            if (this.BottomAppBar != null)
+            {
+                this.BottomAppBar.Opacity = Opacity;
+                this.BottomAppBar.IsSticky = false;
+                this.BottomAppBar.Foreground = new SolidColorBrush(Utility.ConvertColorFromHex("#3B79A9"));
+            }
+        }
     }
 
     public class CompanyDetail
@@ -127,7 +170,7 @@ namespace MoneyManagerAssistance.Views
             {
                 ChartAdornment pieAdornment = value as ChartAdornment;
                 if (pieAdornment.Item != null)
-                    return String.Format((pieAdornment.Item as CompanyDetail).CompanyName + " : Rs. " + pieAdornment.YData + "K");
+                    return String.Format(" 合计:  " + pieAdornment.YData + "元");
                 else
                     return value;
             }
