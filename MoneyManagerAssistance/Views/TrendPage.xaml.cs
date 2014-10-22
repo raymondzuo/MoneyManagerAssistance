@@ -67,8 +67,11 @@ namespace MoneyManagerAssistance.Views
             base.OnNavigatedTo(e);
             vm.SetTrendResult("AccountType",0,1);
             vm.SetTrendResult("AccountType", 0, 2);
-            var inValue = vm.AccountInTrendForBindings.Max(p => p.AccountSum);
-            var outValue = vm.AccountOutTrendForBindings.Max(p => p.AccountSum);
+            float inValue =0, outValue=0;
+            if(vm.AccountInTrendForBindings.Count > 0)
+                inValue = vm.AccountInTrendForBindings.Max(p => p.AccountSum);
+            if(vm.AccountOutTrendForBindings.Count > 0)
+                outValue = vm.AccountOutTrendForBindings.Max(p => p.AccountSum);
 
             this.NumericalAxis.Maximum = Math.Max(inValue, outValue);
             this.NumericalAxis.Minimum = 0;
