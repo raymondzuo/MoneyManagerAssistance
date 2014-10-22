@@ -25,9 +25,18 @@ namespace MoneyManagerAssistance.Views
     /// </summary>
     public sealed partial class CategoryPage : BasePage
     {
+        private CategoryDataViewModel vm;
         public CategoryPage()
         {
             this.InitializeComponent();
+            this.Loaded += OnLoaded;
+            vm = new CategoryDataViewModel();
+            this.MainGrid.DataContext = vm;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            //this.MainGrid.DataContext = new CategoryDataViewModel();
         }
 
         /// <summary>

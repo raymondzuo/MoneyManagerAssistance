@@ -59,15 +59,14 @@
                                         LabelTemplate="{StaticResource labelTemplate}" />
                 </chart:SfChart.PrimaryAxis>
                 <chart:SfChart.SecondaryAxis>
-                    <chart:NumericalAxis FontSize="18" RangePadding="Round" Header="金额"
+                    <chart:NumericalAxis x:Name="NumericalAxis" FontSize="18" RangePadding="Round" Header="金额"
                                          MajorGridLineStyle="{StaticResource LineStyle}"
-                                         TickLineSize="10" Minimum="22" Maximum="50" Interval="4"
                                          HeaderTemplate="{StaticResource headerTemplate}"
                                          LabelTemplate="{StaticResource labelTemplate}" />
                 </chart:SfChart.SecondaryAxis>
  
                 <chart:LineSeries EnableAnimation="True" ShowTooltip="True" chart:ChartTooltip.EnableAnimation="True"
-                                  XBindingPath="Year" Label="收入" ItemsSource="{Binding power}" YBindingPath="Music" Interior="Green">
+                                  XBindingPath="StatisticItem" Label="收入" ItemsSource="{Binding AccountInTrendForBindings}" YBindingPath="AccountSum" Interior="Green">
                     <chart:LineSeries.CustomTemplate>
                         <DataTemplate>
                             <Canvas>
@@ -93,7 +92,7 @@
                 </chart:LineSeries>
 
                 <chart:LineSeries EnableAnimation="True" ShowTooltip="True" chart:ChartTooltip.EnableAnimation="True"
-                                  XBindingPath="Year" Label="支出" ItemsSource="{Binding power}" YBindingPath="Books" Interior="Red">
+                                  XBindingPath="StatisticItem" Label="支出" ItemsSource="{Binding AccountOutTrendForBindings}" YBindingPath="AccountSum" Interior="Red">
                     <chart:LineSeries.CustomTemplate>
                         <DataTemplate>
                             <Canvas>
@@ -103,7 +102,7 @@
                     </chart:LineSeries.CustomTemplate>
                     
                     <chart:LineSeries.AdornmentsInfo>
-                        <chart:ChartAdornmentInfo Symbol="Ellipse" ShowLabel="True" SymbolInterior="Red" ShowMarker="True">
+                        <chart:ChartAdornmentInfo Symbol="Diamond"  ShowLabel="True" SymbolInterior="Red" ShowMarker="True">
                             <chart:ChartAdornmentInfo.LabelTemplate>
                                 <DataTemplate>
                                     <Grid>

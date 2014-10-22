@@ -152,6 +152,12 @@ namespace Raysoft.Database
                              WHERE Account.AccountType = ? AND Account.SubCategoryId = SubAccountCategory.Id
                              GROUP BY SubAccountCategory.Id";
                     break;
+                case "AccountType":
+                    return @"SELECT SUBSTR(Account.AccountDate,6,6), SUM(Account.AccountSum)
+                             FROM Account
+                             WHERE Account.AccountType = ?
+                             GROUP BY SUBSTR(Account.AccountDate,6,6)";
+                    break;
             }
             return @"SELECT * FROM SubAccountCategory WHERE CategoryId = ?";
         }

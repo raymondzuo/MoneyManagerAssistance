@@ -54,7 +54,7 @@ namespace MoneyManagerAssistance.Views
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            this.StatPivot.SelectedIndex = 0;
+            //this.StatPivot.SelectedIndex = 0;
             var param = int.Parse(e.Parameter.ToString());
             if (param == 1)
             {

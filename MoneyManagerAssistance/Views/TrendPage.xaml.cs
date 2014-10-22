@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkID=390556 上有介绍
 using MoneyManagerAssistance.Annotations;
+using MoneyManagerAssistance.ViewModel;
 using Raysoft.Phone.Common;
 using Raysoft.Utility;
 using Syncfusion.UI.Xaml.Charts;
@@ -31,10 +32,18 @@ namespace MoneyManagerAssistance.Views
     {
         DispatcherTimer delayLoader = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1) };
         private AppBarButton addNewAccountings;
+        private AccountTrendViewModel vm;
         public TrendPage()
         {
             this.InitializeComponent();
-            this.Loaded += (o, args) => delayLoader.Start();
+            vm = new AccountTrendViewModel();
+            this.LayoutRoot.DataContext = vm;
+            this.Loaded += (o, args) =>
+            {
+                delayLoader.Start();
+                if (this.NumericalAxis.Interval != null)
+                    this.NumericalAxis.Maximum = (float)this.NumericalAxis.Maximum + (float)this.NumericalAxis.Interval;
+            };
             InitAppBar();
             delayLoader.Tick += timer_Tick;
             this.lineChart.Opacity = 0;
@@ -56,9 +65,15 @@ namespace MoneyManagerAssistance.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            this.DataContext = new LineViewModel();
+            vm.SetTrendResult("AccountType",0,1);
+            vm.SetTrendResult("AccountType", 0, 2);
+            var inValue = vm.AccountInTrendForBindings.Max(p => p.AccountSum);
+            var outValue = vm.AccountOutTrendForBindings.Max(p => p.AccountSum);
+
+            this.NumericalAxis.Maximum = Math.Max(inValue, outValue);
+            this.NumericalAxis.Minimum = 0;
             //this.lineChart.Legend
-            
+
         }
 
         private void InitAppBar()

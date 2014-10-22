@@ -123,7 +123,7 @@
 
                     </charts:SfChart.SecondaryAxis>
                     <charts:SfChart.AreaBorderBrush>#FF1D1D1D</charts:SfChart.AreaBorderBrush>
-                    <charts:ColumnSeries EnableAnimation="True" ShowTooltip="True" charts:ChartTooltip.EnableAnimation="True" Palette="Metro" ItemsSource="{Binding AccountStatisticsForBindings}"  XBindingPath="StatisticItem" YBindingPath="AccountSum" Label="First">
+                    <charts:ColumnSeries EnableAnimation="True" ShowTooltip="True" Palette="Metro" ItemsSource="{Binding AccountStatisticsForBindings}"  XBindingPath="StatisticItem" YBindingPath="AccountSum" Label="First">
                         <charts:ColumnSeries.AdornmentsInfo>
                             <charts:ChartAdornmentInfo AdornmentsPosition="TopAndBottom" HorizontalAlignment="Center" VerticalAlignment="Center" ShowLabel="True" ShowMarker="True">
                                 <charts:ChartAdornmentInfo.LabelTemplate>
