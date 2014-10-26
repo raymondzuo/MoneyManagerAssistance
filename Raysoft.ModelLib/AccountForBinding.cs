@@ -16,7 +16,7 @@ namespace Raysoft.ModelLib
         /// <summary>
         /// 账目日期
         /// </summary>
-        public DateTime AccountDate { get; set; }
+        public string AccountDate { get; set; }
 
         /// <summary>
         /// 账目金额
@@ -36,26 +36,26 @@ namespace Raysoft.ModelLib
         /// <summary>
         /// 账目来源（支付宝/现金/银行卡）
         /// </summary>
-        public int AccountSourceName { get; set; }
+        public string AccountSourceName { get; set; }
 
         /// <summary>
         /// 账目大类别
         /// </summary>
-        public int CategoryName { get; set; }
+        public string CategoryName { get; set; }
 
         /// <summary>
         /// 账目子类别
         /// </summary>
-        public int SubCategoryName { get; set; }
+        public string SubCategoryName { get; set; }
 
         /// <summary>
         /// 成员
         /// </summary>
-        public int MemberName { get; set; }
+        public string MemberName { get; set; }
 
         /// <summary>
         /// 账本名
         /// </summary>
-        public int ABookName { get; set; }
+        public string ABookName { get; set; }
     }
 }

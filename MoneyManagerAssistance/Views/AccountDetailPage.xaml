@@ -1,0 +1,112 @@
+﻿<Base:BasePage
+    x:Class="MoneyManagerAssistance.Views.AccountDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Base="using:Raysoft.Phone.Common"
+    xmlns:local="using:MoneyManagerAssistance.Views"
+    xmlns:sub="using:MoneyManagerAssistance.SubViews"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sf="using:Syncfusion.UI.Xaml.Controls.Input"
+    mc:Ignorable="d"
+    Background="{ThemeResource AppBackgroundColorBrush}">
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="TbStyle">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Foreground" Value="{StaticResource AppForegroundColorBrush}"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Grid.Column" Value="0"></Setter>
+            <Setter Property="Margin" Value="0,5,0,5"></Setter>
+        </Style>
+        <Style TargetType="StackPanel" x:Key="SpStyle">
+            <Setter Property="Height" Value="20"></Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="10 0 10 0" x:Name="layout" HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="财务助理" Foreground="{StaticResource AppForegroundColorBrush}" FontSize="15" Grid.Row="0" Grid.Column="0" Margin="0 10 0 0"/>
+        <TextBlock Text="账目详情" Foreground="{StaticResource AppForegroundColorBrush}" FontSize="30" Grid.Row="1" Grid.Column="0" Margin="0 20 0 0"/>
+
+        <ListView x:Name="DetaiListView" ItemsSource="{Binding AccountForBindings}" Grid.Row="2"  Grid.Column="0" Margin="0 10 0 5">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0 10 0 10" Background="{StaticResource AppModuleBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="AcntDate" Style="{StaticResource TbStyle}" Grid.Row="0">
+                            <Run Text="日期： "></Run>
+                            <Run Text="{Binding AccountDate}"></Run>
+                        </TextBlock>
+                        <TextBlock x:Name="AcntMember" Style="{StaticResource TbStyle}" Grid.Row="1">
+                            <Run Text="成员： "></Run>
+                            <Run Text="{Binding MemberName}"></Run>
+                        </TextBlock>
+                        <TextBlock x:Name="AcntType" Style="{StaticResource TbStyle}" Grid.Row="2">
+                            <Run Text="类型： "></Run>
+                            <Run Text="{Binding AccountTypeName}"></Run>
+                        </TextBlock>
+                        <TextBlock x:Name="AcntSum" Style="{StaticResource TbStyle}" Grid.Row="3">
+                            <Run Text="金额： "></Run>
+                            <Run Text="{Binding AccountSum}"></Run>
+                            <Run Text=" 元"></Run>
+                        </TextBlock>
+                        <TextBlock x:Name="AcntSubCate" Style="{StaticResource TbStyle}" Grid.Row="4">
+                            <Run Text="小类： "></Run>
+                            <Run Text="{Binding SubCategoryName}"></Run>
+                        </TextBlock>
+                        <TextBlock x:Name="AcntCate" Style="{StaticResource TbStyle}" Grid.Row="5">
+                            <Run Text="大类： "></Run>
+                            <Run Text="{Binding CategoryName}"></Run>
+                        </TextBlock>
+                        <TextBlock x:Name="AcntDesc" Style="{StaticResource TbStyle}" Grid.Row="6">
+                            <Run Text="备注： "></Run>
+                            <Run Text="{Binding Description,FallbackValue = 无}"></Run>
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar Foreground="{StaticResource AppForegroundColorBrush}">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="SaveAppBarButton" Label="保存">
+                    <AppBarButton.Icon>
+                        <BitmapIcon UriSource="../Assets/AppBarIcon/Save.png"></BitmapIcon>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Name="SaveAndBackBtn" Label="保存返回" Click="SaveAndBackBtn_OnClick">
+                    <AppBarButton.Icon>
+                        <BitmapIcon UriSource="../Assets/AppBarIcon/CommandUndo.png"></BitmapIcon>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Base:BasePage>

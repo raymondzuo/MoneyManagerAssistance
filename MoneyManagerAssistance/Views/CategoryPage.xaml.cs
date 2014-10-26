@@ -15,8 +15,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkID=390556 上有介绍
+using MoneyManagerAssistance.ViewModel;
 using Raysoft.Phone.Common;
 using System.ComponentModel;
+using Raysoft.Utility;
 
 namespace MoneyManagerAssistance.Views
 {
@@ -25,18 +27,14 @@ namespace MoneyManagerAssistance.Views
     /// </summary>
     public sealed partial class CategoryPage : BasePage
     {
-        private CategoryDataViewModel vm;
+        private AccoutStatisticsViewModel vm;
+        private AppBarButton addNewAccountings;
         public CategoryPage()
         {
             this.InitializeComponent();
-            this.Loaded += OnLoaded;
-            vm = new CategoryDataViewModel();
+            vm = new AccoutStatisticsViewModel();
             this.MainGrid.DataContext = vm;
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
-        {
-            //this.MainGrid.DataContext = new CategoryDataViewModel();
+            InitAppBar();
         }
 
         /// <summary>
@@ -47,72 +45,34 @@ namespace MoneyManagerAssistance.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-        }
-    }
-
-    public class CategoryDataViewModel
-    {
-        public CategoryDataViewModel()
-        {
-            CategoricalDatas = new ObservableCollection<CategoryData>();
-            CategoricalDatas.Add(new CategoryData("Metal", 5));
-            CategoricalDatas.Add(new CategoryData("Plastic", 10));
-            CategoricalDatas.Add(new CategoryData("Silver", 15));
-            CategoricalDatas.Add(new CategoryData("Iron", 20));
-
-        }
-        public ObservableCollection<CategoryData> CategoricalDatas
-        {
-            get;
-            set;
-        }
-    }
-
-    public class CategoryData : INotifyPropertyChanged
-    {
-        private string category; private double value;
-
-        public CategoryData(string category, double value)
-        {
-            Category = category; Value = value;
+            vm.SetStatisticsResult("MemberId",0,0);
         }
 
-        public string Category
+        private void InitAppBar()
         {
-            get
-            { return category; }
-            set
+            var appBar = new CommandBar();
+
+            addNewAccountings = new AppBarButton() { Label = "查看大类" };
+            addNewAccountings.Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBarIcon/Add-New.png", UriKind.RelativeOrAbsolute) };
+            addNewAccountings.Click += (sender, args) =>
             {
-                if (category != value)
-                {
-                    category = value;
-                    OnPropertyChanged("Category");
-                }
+
+
+            };
+
+            appBar.PrimaryCommands.Add(addNewAccountings);
+            this.BottomAppBar = appBar;
+            SetAppBarBackgroundColor();
+        }
+
+        public void SetAppBarBackgroundColor(double Opacity = 0.88)
+        {
+            if (this.BottomAppBar != null)
+            {
+                this.BottomAppBar.Opacity = Opacity;
+                this.BottomAppBar.IsSticky = false;
+                this.BottomAppBar.Foreground = new SolidColorBrush(Utility.ConvertColorFromHex("#3B79A9"));
             }
         }
-
-        public double Value
-        {
-            get
-            { return value; }
-            set
-            {
-                if (this.value != value)
-                {
-                    this.value = value;
-                    OnPropertyChanged("Value");
-                }
-            }
-        }
-
-
-        void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

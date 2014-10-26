@@ -158,6 +158,17 @@ namespace Raysoft.Database
                              WHERE Account.AccountType = ?
                              GROUP BY SUBSTR(Account.AccountDate,6,6)";
                     break;
+                case "MemberId":
+                    return @"SELECT Member.Name, SUM(Account.AccountSum)
+                             FROM Account,Member
+                             WHERE Account.MemberId = Member.Id
+                             GROUP BY Account.MemberId";
+                    break;
+                case "DetailAll":
+                    return @"SELECT Account.AccountDate,Member.Name,Account.Description,Account.AccountSum,AccountType.Name,AccountSource.Name,AccountBook.Name,SubAccountCategory.Name,AccountCategory.Name
+                             FROM Account,AccountBook,SubAccountCategory,AccountSource,AccountType,AccountCategory,Member
+                             WHERE Account.AccountType = AccountType.Id AND Account.SubCategoryId = SubAccountCategory.Id AND Account.ABookId = AccountBook.Id AND Account.AccountSourceId = AccountSource.Id AND AccountCategory.Id = SubAccountCategory.CategoryId AND Member.Id = Account.MemberId";
+                    break;
             }
             return @"SELECT * FROM SubAccountCategory WHERE CategoryId = ?";
         }
@@ -173,7 +184,8 @@ namespace Raysoft.Database
 
             using (var statement = sqlConnection.Prepare(GetSelectItemSqlByCondition(condition)))
             {
-                FillSelectItemStatementByCategoryId(statement, accountType);
+                if(accountType != 0)
+                    FillSelectItemStatementByCategoryId(statement, accountType);
 
                 while (statement.Step() == SQLiteResult.ROW)
                 {
@@ -189,6 +201,35 @@ namespace Raysoft.Database
             return items;
         }
 
+        public ObservableCollection<AccountForBinding> GetAccountDetailByCondition(string condition, int value, int accountType)
+        {
+            var items = new ObservableCollection<AccountForBinding>();
+
+            using (var statement = sqlConnection.Prepare(GetSelectItemSqlByCondition(condition)))
+            {
+                if (accountType != 0)
+                    FillSelectItemStatementByCategoryId(statement, accountType);
+
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    var item = new AccountForBinding()
+                    {
+                        AccountDate = statement[0].ToString(),
+                        MemberName = statement[1].ToString(),
+                        Description = statement[2].ToString(),
+                        AccountSum = float.Parse(statement[3].ToString()),
+                        AccountTypeName = statement[4].ToString(),
+                        AccountSourceName = statement[5].ToString(),
+                        ABookName = statement[6].ToString(),
+                        SubCategoryName = statement[7].ToString(),
+                        CategoryName = statement[8].ToString(),
+                    };
+                    items.Add(item);
+                }
+            }
+
+            return items;
+        }
         #endregion
     }
 }

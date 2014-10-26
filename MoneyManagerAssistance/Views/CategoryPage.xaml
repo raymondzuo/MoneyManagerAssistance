@@ -37,7 +37,7 @@
                 <TextBlock FontSize="22" FontFamily="Segoe UI" Margin="10" Foreground="{StaticResource AppForegroundColorBrush}">成员支出统计</TextBlock>
             </charts:SfChart.Header>
             <charts:SfChart.PrimaryAxis>
-                <charts:CategoryAxis Header="成员" 
+                <charts:CategoryAxis Header="成员"
                                      MajorGridLineStyle="{StaticResource majorTickLineStyle}"
                     TickLineSize="10" 
                     FontSize="18"
@@ -47,12 +47,12 @@
             </charts:SfChart.PrimaryAxis>
             <charts:SfChart.SecondaryAxis>
                 <charts:NumericalAxis   FontSize="18" Foreground="{StaticResource AppForegroundColorBrush}"
-                                     Minimum="0" Maximum="25"    Header="金额" MajorGridLineStyle="{StaticResource majorTickLineStyle}"
+                                     Header="金额" MajorGridLineStyle="{StaticResource majorTickLineStyle}"
                     LabelTemplate="{StaticResource labelTemplate}"/>
                 
             </charts:SfChart.SecondaryAxis>
             <charts:SfChart.AreaBorderBrush>#FF1D1D1D</charts:SfChart.AreaBorderBrush>
-            <charts:ColumnSeries EnableAnimation="True" ShowTooltip="True"  charts:ChartTooltip.EnableAnimation="False"  Palette="Metro" ItemsSource="{Binding CategoricalDatas}"  XBindingPath="Category" YBindingPath="Value" Label="First">
+            <charts:ColumnSeries EnableAnimation="True" ShowTooltip="True"  Palette="Metro" ItemsSource="{Binding AccountStatisticsForBindings}"  XBindingPath="StatisticItem" YBindingPath="AccountSum" Label="First">
                 <charts:ColumnSeries.AdornmentsInfo>
                     <charts:ChartAdornmentInfo AdornmentsPosition="TopAndBottom" HorizontalAlignment="Center" VerticalAlignment="Center" ShowLabel="True" ShowMarker="True">
                         <charts:ChartAdornmentInfo.LabelTemplate>

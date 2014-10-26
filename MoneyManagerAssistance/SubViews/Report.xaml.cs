@@ -31,6 +31,9 @@ namespace MoneyManagerAssistance.SubViews
             var border = sender as Border;
             switch (border.Tag.ToString())
             {
+                case "0":
+                    NavigationService.Navigate(typeof(AccountDetailPage));
+                    break;
                 case "1":
                 case "4":
                     NavigationService.Navigate(typeof(TrendPage));
