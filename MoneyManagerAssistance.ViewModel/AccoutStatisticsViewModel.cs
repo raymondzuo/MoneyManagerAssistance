@@ -19,9 +19,9 @@ namespace MoneyManagerAssistance.ViewModel
             set { SetValue(ref accountStatisticsForBindings, value); }
         }
 
-        public void SetStatisticsResult(string statItem, int value,int accountType)
+        public void SetStatisticsResult(string statItem, Dictionary<string,string> conditionDictionary)
         {
-            AccountStatisticsForBindings = AccountTableDbLogicLayer.Instance.GetAccountStatResultByCondition(statItem, value, accountType);
+            AccountStatisticsForBindings = AccountTableDbLogicLayer.Instance.GetAccountStatResultByCondition(statItem, conditionDictionary);
         }
     }
 }

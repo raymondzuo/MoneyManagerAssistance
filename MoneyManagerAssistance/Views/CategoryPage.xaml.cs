@@ -45,7 +45,8 @@ namespace MoneyManagerAssistance.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            vm.SetStatisticsResult("MemberId",0,0);
+            var conditionDic = new Dictionary<string, string>();
+            vm.SetStatisticsResult("MemberId", conditionDic);
         }
 
         private void InitAppBar()

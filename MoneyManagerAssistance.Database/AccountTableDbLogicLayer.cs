@@ -142,50 +142,77 @@ namespace Raysoft.Database
             statement.Bind(i, key);
         }
 
-        protected string GetSelectItemSqlByCondition(string condition)
+        private string PrepareWhereStatement(bool isNeedWhereWord, Dictionary<string, string> conditionDictionary)
+        {
+            var sb = new StringBuilder();
+
+            foreach (var condition in conditionDictionary)
+            {
+                if (isNeedWhereWord)
+                {
+                    sb.Append(string.Format(" WHERE {0} = ? ",condition.Key));
+                    isNeedWhereWord = false;
+                    continue;
+                }
+
+                sb.Append(string.Format(" AND {0} = ? ",condition.Key));
+            }
+
+            sb.Append(" ");
+            return sb.ToString();
+        }
+
+        protected string GetSelectItemSqlByCondition(string condition, Dictionary<string, string> conditionDictionary)
         {
             switch (condition)
             {
                 case "SubCategoryId":
                     return @"SELECT SubAccountCategory.Name, SUM(Account.AccountSum)
                              FROM Account,SubAccountCategory
-                             WHERE Account.AccountType = ? AND Account.SubCategoryId = SubAccountCategory.Id
-                             GROUP BY SubAccountCategory.Id";
+                             WHERE Account.SubCategoryId = SubAccountCategory.Id" + PrepareWhereStatement(false, conditionDictionary) + 
+                           @"GROUP BY SubAccountCategory.Id";
                     break;
                 case "AccountType":
                     return @"SELECT SUBSTR(Account.AccountDate,6,6), SUM(Account.AccountSum)
-                             FROM Account
-                             WHERE Account.AccountType = ?
-                             GROUP BY SUBSTR(Account.AccountDate,6,6)";
+                             FROM Account" + 
+                             PrepareWhereStatement(true, conditionDictionary) 
+                         + @"GROUP BY SUBSTR(Account.AccountDate,6,6)";
                     break;
                 case "MemberId":
                     return @"SELECT Member.Name, SUM(Account.AccountSum)
                              FROM Account,Member
-                             WHERE Account.MemberId = Member.Id
-                             GROUP BY Account.MemberId";
+                             WHERE Account.MemberId = Member.Id" + PrepareWhereStatement(false, conditionDictionary)
+                         + @"GROUP BY Account.MemberId";
                     break;
                 case "DetailAll":
                     return @"SELECT Account.AccountDate,Member.Name,Account.Description,Account.AccountSum,AccountType.Name,AccountSource.Name,AccountBook.Name,SubAccountCategory.Name,AccountCategory.Name
                              FROM Account,AccountBook,SubAccountCategory,AccountSource,AccountType,AccountCategory,Member
-                             WHERE Account.AccountType = AccountType.Id AND Account.SubCategoryId = SubAccountCategory.Id AND Account.ABookId = AccountBook.Id AND Account.AccountSourceId = AccountSource.Id AND AccountCategory.Id = SubAccountCategory.CategoryId AND Member.Id = Account.MemberId";
+                             WHERE Account.AccountType = AccountType.Id AND Account.SubCategoryId = SubAccountCategory.Id AND Account.ABookId = AccountBook.Id AND Account.AccountSourceId = AccountSource.Id AND AccountCategory.Id = SubAccountCategory.CategoryId AND Member.Id = Account.MemberId"
+                           + PrepareWhereStatement(false, conditionDictionary);
                     break;
             }
             return @"SELECT * FROM SubAccountCategory WHERE CategoryId = ?";
         }
 
-        protected void FillSelectItemStatementByCategoryId(ISQLiteStatement statement, int accountType)
+        protected void FillSelectItemStatementByCategoryId(ISQLiteStatement statement, Dictionary<string, string> conditionDictionary)
         {
-            statement.Bind(1, accountType);
+            int i = 1;
+
+            foreach (var condition in conditionDictionary)
+            {
+                statement.Bind(i,condition.Value);
+                i++;
+            }
         }
 
-        public ObservableCollection<AccountStatisticsForBinding> GetAccountStatResultByCondition(string condition, int value,int accountType)
+        public ObservableCollection<AccountStatisticsForBinding> GetAccountStatResultByCondition(string condition, Dictionary<string, string> conditionDictionary)
         {
             var items = new ObservableCollection<AccountStatisticsForBinding>();
 
-            using (var statement = sqlConnection.Prepare(GetSelectItemSqlByCondition(condition)))
+            using (var statement = sqlConnection.Prepare(GetSelectItemSqlByCondition(condition,conditionDictionary)))
             {
-                if(accountType != 0)
-                    FillSelectItemStatementByCategoryId(statement, accountType);
+                if (conditionDictionary.Count > 0)
+                    FillSelectItemStatementByCategoryId(statement, conditionDictionary);
 
                 while (statement.Step() == SQLiteResult.ROW)
                 {
@@ -201,14 +228,14 @@ namespace Raysoft.Database
             return items;
         }
 
-        public ObservableCollection<AccountForBinding> GetAccountDetailByCondition(string condition, int value, int accountType)
+        public ObservableCollection<AccountForBinding> GetAccountDetailByCondition(string condition, Dictionary<string, string> conditionDictionary)
         {
             var items = new ObservableCollection<AccountForBinding>();
 
-            using (var statement = sqlConnection.Prepare(GetSelectItemSqlByCondition(condition)))
+            using (var statement = sqlConnection.Prepare(GetSelectItemSqlByCondition(condition, conditionDictionary)))
             {
-                if (accountType != 0)
-                    FillSelectItemStatementByCategoryId(statement, accountType);
+                if (conditionDictionary.Count > 0)
+                    FillSelectItemStatementByCategoryId(statement, conditionDictionary);
 
                 while (statement.Step() == SQLiteResult.ROW)
                 {

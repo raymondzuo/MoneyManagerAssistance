@@ -26,12 +26,16 @@ namespace MoneyManagerAssistance.ViewModel
             set { SetValue(ref accountInTrendForBindings, value); }
         }
 
-        public void SetTrendResult(string statItem, int value, int accountType)
+        public void SetTrendResult(string statItem, Dictionary<string,string> conditionDictionary)
         {
-            if(accountType == 1)
-                AccountOutTrendForBindings = AccountTableDbLogicLayer.Instance.GetAccountStatResultByCondition(statItem, value, accountType);
-            else if (accountType == 2)
-                AccountInTrendForBindings = AccountTableDbLogicLayer.Instance.GetAccountStatResultByCondition(statItem, value, accountType);
+            if (conditionDictionary.ContainsKey("Account.AccountType"))
+            {
+                if (conditionDictionary["Account.AccountType"] == "1")
+                    AccountOutTrendForBindings = AccountTableDbLogicLayer.Instance.GetAccountStatResultByCondition(statItem, conditionDictionary);
+                else if (conditionDictionary["Account.AccountType"] == "2")
+                    AccountInTrendForBindings = AccountTableDbLogicLayer.Instance.GetAccountStatResultByCondition(statItem, conditionDictionary);
+            }
+            
         }
     }
 }

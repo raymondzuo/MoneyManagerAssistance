@@ -10,7 +10,7 @@ using Raysoft.Phone.Common;
 
 namespace MoneyManagerAssistance.ViewModel
 {
-    public class AccountDetailViewModel:BaseViewModel
+    public class MainPageViewModel:BaseViewModel
     {
         private ObservableCollection<AccountForBinding> accountForBindings;
         public ObservableCollection<AccountForBinding> AccountForBindings

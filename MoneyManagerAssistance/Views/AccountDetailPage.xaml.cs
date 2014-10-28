@@ -57,7 +57,9 @@ namespace MoneyManagerAssistance.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            vm.SetStatisticsResult("DetailAll",0,0);
+
+            var conditionDic = new Dictionary<string, string>();
+            vm.SetStatisticsResult("DetailAll", conditionDic);
         }
 
         protected override void OnBackKeyPress(BackPressedEventArgs e)

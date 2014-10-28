@@ -96,6 +96,7 @@
     <Compile Include="AccoutStatisticsViewModel.cs" />
     <Compile Include="AccoutViewModel.cs" />
     <Compile Include="AppViewModel.cs" />
+    <Compile Include="MainPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

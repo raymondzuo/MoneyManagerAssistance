@@ -39,6 +39,12 @@ namespace MoneyManagerAssistance
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
             this.UnhandledException += OnUnhandledException;
+            Application.Current.UnhandledException += CurrentOnUnhandledException;
+        }
+
+        private void CurrentOnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
+        {
+            unhandledExceptionEventArgs.Handled = true;
         }
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)

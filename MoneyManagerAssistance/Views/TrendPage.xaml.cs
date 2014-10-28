@@ -65,8 +65,14 @@ namespace MoneyManagerAssistance.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            vm.SetTrendResult("AccountType",0,1);
-            vm.SetTrendResult("AccountType", 0, 2);
+            
+            var conditionDic = new Dictionary<string, string>();
+            conditionDic.Add("Account.AccountType","1");
+            vm.SetTrendResult("AccountType",conditionDic);
+            conditionDic.Clear();
+            conditionDic.Add("Account.AccountType", "2");
+            vm.SetTrendResult("AccountType", conditionDic);
+
             float inValue =0, outValue=0;
             if(vm.AccountInTrendForBindings.Count > 0)
                 inValue = vm.AccountInTrendForBindings.Max(p => p.AccountSum);
@@ -75,7 +81,6 @@ namespace MoneyManagerAssistance.Views
 
             this.NumericalAxis.Maximum = Math.Max(inValue, outValue);
             this.NumericalAxis.Minimum = 0;
-            //this.lineChart.Legend
 
         }
 

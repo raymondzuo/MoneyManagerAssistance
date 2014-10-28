@@ -64,11 +64,10 @@ namespace MoneyManagerAssistance.Views
             {
                 this.StatPivot.Title = "收入统计图";
             }
-            vm.SetStatisticsResult("SubCategoryId", 0, param);
-            //viewModel = new PieChartViewModel();
-            //this.PivotItem.DataContext = viewModel;
-            //ColumnViewModel = new StackingColumnChartViewModel();
-            //this.PivotItem1.DataContext = this;
+
+            var conditionDic = new Dictionary<string, string>();
+            conditionDic.Add("Account.AccountType",param.ToString());
+            vm.SetStatisticsResult("SubCategoryId", conditionDic);
         }
 
         private void InitAppBar()
