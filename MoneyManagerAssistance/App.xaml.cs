@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using MoneyManagerAssistance.ViewModel;
 using Raysoft.Database;
+using Raysoft.Storage;
 using SQLitePCL;
 
 namespace MoneyManagerAssistance
@@ -40,16 +41,25 @@ namespace MoneyManagerAssistance
             this.Suspending += this.OnSuspending;
             this.UnhandledException += OnUnhandledException;
             Application.Current.UnhandledException += CurrentOnUnhandledException;
+#if DEBUG
+            StorageHelper.WriteStringToFile("启动 ：", "Exception", false);
+#endif
         }
 
-        private void CurrentOnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
+        private async void CurrentOnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
         {
             unhandledExceptionEventArgs.Handled = true;
+            await StorageHelper.WriteStringToFile(
+                unhandledExceptionEventArgs.Message + "  " + unhandledExceptionEventArgs.Exception.ToString(),
+                "Exception", false);
         }
 
-        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
+        private async void OnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
         {
             unhandledExceptionEventArgs.Handled = true;
+            await StorageHelper.WriteStringToFile(
+                unhandledExceptionEventArgs.Message + "  " + unhandledExceptionEventArgs.Exception.ToString(),
+                "Exception", false);
         }
 
         /// <summary>

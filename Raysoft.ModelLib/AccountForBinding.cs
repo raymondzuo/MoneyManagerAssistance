@@ -13,10 +13,15 @@ namespace Raysoft.ModelLib
         /// </summary>
         public long Id { get; set; }
 
+        private string accountDate;
         /// <summary>
         /// 账目日期
         /// </summary>
-        public string AccountDate { get; set; }
+        public string AccountDate
+        {
+            get { return accountDate.Substring(5); }
+            set { this.SetProperty(ref accountDate, value); }
+        }
 
         /// <summary>
         /// 账目金额

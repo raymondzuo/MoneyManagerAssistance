@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // “用户控件”项模板在 http://go.microsoft.com/fwlink/?LinkId=234236 上提供
+using MoneyManagerAssistance.ViewModel;
 
 namespace MoneyManagerAssistance.SubViews
 {
@@ -24,11 +25,26 @@ namespace MoneyManagerAssistance.SubViews
         /// <summary>
         /// 4个参数分别是tag名，箭头图片，收缩的grid，是否展开
         /// </summary>
-        private List<Tuple<string, UIElement, UIElement,bool>> AnimationInfos = new List<Tuple<string, UIElement, UIElement, bool>>(); 
+        private List<Tuple<string, UIElement, UIElement,bool>> AnimationInfos = new List<Tuple<string, UIElement, UIElement, bool>>();
+
+        private MainPageViewModel vm;
 
         public MoneyGlance()
         {
             this.InitializeComponent();
+            vm = MainPageViewModel.Instance;
+            this.DataContext = vm;
+            this.Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var inDic = new Dictionary<string, string>();
+            inDic.Add("Account.AccountType","2");
+            vm.SetInAccountResult("DetailAll", inDic);
+            inDic.Clear();
+            inDic.Add("Account.AccountType", "1");
+            vm.SetOutAccountResult("DetailAll", inDic);
         }
 
         private void Image_OnTapped(object sender, TappedRoutedEventArgs e)

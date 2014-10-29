@@ -15,6 +15,31 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
             <Setter Property="Height" Value="60"></Setter>
         </Style>
+        
+        <Style TargetType="TextBlock" x:Key="TbStyle">
+            <Setter Property="Foreground" Value="{StaticResource AppForegroundColorBrush}"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Margin" Value="0 0 20 0"></Setter>
+        </Style>
+        
+        <DataTemplate x:Key="GlanceDataTemplate">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource TbStyle}" HorizontalAlignment="Left" Text="{Binding AccountDate}" Grid.Column="0"></TextBlock>
+                <TextBlock Style="{StaticResource TbStyle}" Text="{Binding MemberName}" Grid.Column="1"></TextBlock>
+                <TextBlock Style="{StaticResource TbStyle}" Text="{Binding SubCategoryName}" Grid.Column="2"></TextBlock>
+                <TextBlock Style="{StaticResource TbStyle}" Grid.Column="3">
+                    <Run Text="{Binding AccountSum}"></Run>
+                    <Run Text="元"></Run>
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <ScrollViewer HorizontalScrollMode="Disabled">
@@ -48,7 +73,8 @@
                     </TextBlock>
 
                     <TextBlock  x:Name="Income" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1">
-                        <Run Text="500" Foreground="Green"></Run>
+                        <Run Text="{Binding InAccountSum}" Foreground="Green"></Run>
+                        <Run Text="元" Foreground="Green"></Run>
                     </TextBlock>
 
                     <Image Source="../Assets/AppBarIcon/ArrowheadDown_NoCircle.png" Width="50" Height="50" HorizontalAlignment="Right" 
@@ -64,21 +90,12 @@
                     <Grid.RenderTransform>
                         <CompositeTransform/>
                     </Grid.RenderTransform>
-                    <ListView x:Name="IncomListView" Height="200">
-                        <ListView.Items>
-                            <TextBlock Text="本月收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月收入" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                        </ListView.Items>
+                    <ListView x:Name="IncomListView" Height="200" ItemTemplate="{StaticResource GlanceDataTemplate}" ItemsSource="{Binding InAccountForBindings}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                     </ListView>
                 </Grid>
 
@@ -94,7 +111,8 @@
                     </TextBlock>
 
                     <TextBlock x:Name="Expend" FontSize="20" VerticalAlignment="Center" Grid.Column="1">
-                        <Run Text="500" Foreground="Red"></Run>
+                        <Run Text="{Binding OutAccountSum}" Foreground="Red"></Run>
+                        <Run Text="元" Foreground="Red"></Run>
                     </TextBlock>
 
                     <Image Source="../Assets/AppBarIcon/ArrowheadDown_NoCircle.png" Width="50" Height="50" HorizontalAlignment="Right"
@@ -110,21 +128,12 @@
                     <Grid.RenderTransform>
                         <CompositeTransform/>
                     </Grid.RenderTransform>
-                    <ListView x:Name="ExpendListView" Height="200">
-                        <ListView.Items>
-                            <TextBlock Text="本月支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                            <TextBlock Text="本月支出" Foreground="{StaticResource AppForegroundColorBrush}"></TextBlock>
-                        </ListView.Items>
+                    <ListView x:Name="ExpendListView" Height="200" ItemTemplate="{StaticResource GlanceDataTemplate}" ItemsSource="{Binding OutAccountForBindings}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                     </ListView>
                 </Grid>
 

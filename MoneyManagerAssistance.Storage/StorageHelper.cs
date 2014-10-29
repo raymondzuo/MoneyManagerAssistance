@@ -171,12 +171,21 @@ namespace Raysoft.Storage
         /// <returns></returns>
         public static async Task<bool> IsFileExist(string fileName)
         {
+            StorageFile targetFile = null;
             if (string.IsNullOrEmpty(fileName))
             {
                 return false;
             }
 
-            var targetFile = await LocalFolder.GetFileAsync(fileName);
+            try
+            {
+                targetFile = await LocalFolder.GetFileAsync(fileName);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
             if (targetFile != null)
             {
                 return true;

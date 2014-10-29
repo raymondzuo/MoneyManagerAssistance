@@ -243,6 +243,10 @@
       <Project>{d29e906e-a763-4fed-bc25-c03dc8bb2e8f}</Project>
       <Name>Raysoft.Database</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MoneyManagerAssistance.Storage\Raysoft.Storage.csproj">
+      <Project>{d50f3a93-a8f8-45a7-b5d0-aa17bf94fff0}</Project>
+      <Name>Raysoft.Storage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MoneyManagerAssistance.ViewModel\MoneyManagerAssistance.ViewModel.csproj">
       <Project>{bd46f4f8-d57a-4f51-9a1e-9980a9dae923}</Project>
       <Name>MoneyManagerAssistance.ViewModel</Name>
