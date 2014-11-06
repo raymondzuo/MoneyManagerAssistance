@@ -47,6 +47,11 @@
     <Compile Include="MemberTableDbLogicLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseTableDbLogicLayer.cs" />
+    <Compile Include="Sqlite.Platform\ReflectionServiceWinRT.cs" />
+    <Compile Include="Sqlite.Platform\SQLiteApiWinRT.cs" />
+    <Compile Include="Sqlite.Platform\SQLitePlatformWinRT.cs" />
+    <Compile Include="Sqlite.Platform\StopwatchFactoryWinRT.cs" />
+    <Compile Include="Sqlite.Platform\VolatileServiceWinRT.cs" />
     <Compile Include="SubAccountCategoryTableDbLogicLayer.cs" />
   </ItemGroup>
   <ItemGroup>
